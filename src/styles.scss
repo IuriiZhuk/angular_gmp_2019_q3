@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./styles/colors";
+@import "../node_modules/normalize-scss/sass/normalize";
+
+html, body {
+  height: 100%;
+}
+
