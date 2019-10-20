@@ -6,12 +6,24 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LogoComponent } from './logo/logo.component';
 
+const COMPONENTS = [
+  MainHeaderComponent,
+  MainFooterComponent,
+  BreadcrumbsComponent,
+  SearchBarComponent,
+  LogoComponent,
+];
 
 
 @NgModule({
-  declarations: [MainHeaderComponent, MainFooterComponent, BreadcrumbsComponent, SearchBarComponent, LogoComponent],
+  declarations: [
+    ...COMPONENTS,
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+  ],
+  exports: [
+    ...COMPONENTS,
+  ],
 })
 export class UiModule { }
