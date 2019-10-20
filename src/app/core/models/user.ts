@@ -5,16 +5,9 @@ export interface IUser {
 }
 
 export class User implements IUser {
-  public id: string;
-  public firstName: string;
-  public lastName: string;
-    constructor(
-      id: string,
-      firstName: string,
-      lastName: string,
-      ) {
-        this.firstName = firstName;
-        this.id = id;
-        this.lastName = lastName;
-    }
+  constructor(
+    public id: string,
+    public firstName: string,
+    public lastName: string,
+    ) { }
 }
