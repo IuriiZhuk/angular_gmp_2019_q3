@@ -1,0 +1,11 @@
+@import '../../../styles/colors';
+
+.breadcrumbs__list {
+  margin: 0;
+  padding: 20px 0px;
+  list-style: none;
+  display: flex;
+  font-size: 14px;
+  font-weight: 600;
+  color: $dark;
+}
