@@ -1,15 +1,10 @@
-<button class="add-course">
+<button class="button add-course">
   Add course
 </button>
-<ul class="course-list">
+<ul class="course-list" *ngFor="let course of mockCourses">
   <li class="course-list__item">
-    <app-course-details></app-course-details>
+    <app-course-details [course]="course" (delete)="onDeleteHandler($event)"></app-course-details>
   </li>
-  <li class="course-list__item">
-    <app-course-details></app-course-details>
-  </li>
-  <li class="course-list__item">
-    <app-course-details></app-course-details>
-  </li>
+  
 </ul>
-<button class="load-more"> Load More</button>
+<button class="button load-more" (click)="onLoadMoreHandler()"> Load More</button>
