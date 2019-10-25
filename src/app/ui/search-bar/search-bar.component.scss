@@ -1,0 +1,25 @@
+@import '../../../styles/colors';
+
+.search-form {
+
+  display: flex;
+
+  &__input {
+    position: relative;
+    color: $silver;
+    font-size: 14px;
+    margin-right: 6px;
+    padding: 12px 140px 12px 42px;
+    border-radius: 3px;
+    border: 1px solid $input-border;
+
+  }
+
+  &__button {
+    font-size: 18px;
+    color: $white;
+    padding: 12px 24px;
+    background-color: $sick-green;
+  }
+
+}
