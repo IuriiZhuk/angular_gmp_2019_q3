@@ -1,25 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CourseDetailsComponent } from "./course-details.component";
+import { Course } from '../../models/course';
 
-import { CourseDetailsComponent } from './course-details.component';
-
-describe('CourseDetailsComponent', () => {
-  let component: CourseDetailsComponent;
-  let fixture: ComponentFixture<CourseDetailsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CourseDetailsComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CourseDetailsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+it('raises the selected event when clicked', () => {
+  const component = new CourseDetailsComponent();
+  const expectedCourse = new Course('1', 'Test Course', '1-1-1', '60', 'test description');
+  component.course = expectedCourse;
+  component.delete.subscribe((deletedCOurseId: string) => expect(deletedCOurseId).toBe(expectedCourse.id));
+  component.onDeleteHandler(expectedCourse.id);
 });
