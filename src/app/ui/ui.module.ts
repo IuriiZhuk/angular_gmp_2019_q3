@@ -7,6 +7,7 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LogoComponent } from './logo/logo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -24,9 +25,11 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   exports: [
     ...COMPONENTS,
+    FontAwesomeModule,
   ],
 })
 export class UiModule { }
