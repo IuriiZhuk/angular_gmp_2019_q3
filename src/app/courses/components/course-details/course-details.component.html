@@ -1,4 +1,4 @@
-<div [ngClass]="{'course-details': true, 'course-details__top-rated': course.topRated }"
+<div [appHighlightedRelevant]="course.creationDate" [ngClass]="{'course-details': true, 'course-details__top-rated': course.topRated }"
 >
   <div class="course-details__header">
     <h2 class="course-details__title">{{course.title | uppercase}}</h2>

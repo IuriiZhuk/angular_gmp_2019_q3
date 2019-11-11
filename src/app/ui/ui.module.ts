@@ -8,6 +8,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LogoComponent } from './logo/logo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HighlightedRelevantDirective } from './directives/highlighted-relevant.directive';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -21,6 +22,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [
     ...COMPONENTS,
+    HighlightedRelevantDirective,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ const COMPONENTS = [
   exports: [
     ...COMPONENTS,
     FontAwesomeModule,
+    HighlightedRelevantDirective,
   ],
 })
 export class UiModule { }
