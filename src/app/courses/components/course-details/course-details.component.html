@@ -1,7 +1,7 @@
 <div [ngClass]="{'course-details': true, 'course-details__top-rated': course.topRated }"
 >
   <div class="course-details__header">
-    <h2 class="course-details__title">{{course.title}}</h2>
+    <h2 class="course-details__title">{{course.title | uppercase}}</h2>
     <fa-icon
       *ngIf="course.topRated"
       class="course-details__top-rated-icon"
