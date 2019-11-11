@@ -8,7 +8,10 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LogoComponent } from './logo/logo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+/* Directives */
 import { HighlightedRelevantDirective } from './directives/highlighted-relevant.directive';
+/* Pipes */
+import { DurationPipe } from './pipes/duration.pipe';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -23,6 +26,7 @@ const COMPONENTS = [
   declarations: [
     ...COMPONENTS,
     HighlightedRelevantDirective,
+    DurationPipe,
   ],
   imports: [
     CommonModule,
@@ -33,6 +37,7 @@ const COMPONENTS = [
     ...COMPONENTS,
     FontAwesomeModule,
     HighlightedRelevantDirective,
+    DurationPipe,
   ],
 })
 export class UiModule { }

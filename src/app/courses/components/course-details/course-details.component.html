@@ -8,8 +8,8 @@
       [icon]="faStar">
     </fa-icon>
     <div class="course-details__timing">
-      <span class="course-details__duration">{{course.duration}}</span>
-      <span class="course-details__date">{{course.creationDate}}</span>
+      <span class="course-details__duration">{{course.duration | duration}}</span>
+      <span class="course-details__date">{{course.creationDate | date: 'longDate'}}</span>
     </div>
   </div>
   
