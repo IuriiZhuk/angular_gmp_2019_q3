@@ -3,7 +3,7 @@
 </button>
 
 <ng-container *ngIf="(mockCourses && mockCourses.length > 0); else noCoursesData">
-  <ul class="course-list" *ngFor="let course of mockCourses">
+  <ul class="course-list" *ngFor="let course of (mockCourses | orderByDate)">
     <li class="course-list__item">
       <app-course-details [course]="course" (delete)="onDeleteHandler($event)"></app-course-details>
     </li>

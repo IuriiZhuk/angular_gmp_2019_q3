@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HighlightedRelevantDirective } from './directives/highlighted-relevant.directive';
 /* Pipes */
 import { DurationPipe } from './pipes/duration.pipe';
+import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -27,6 +28,7 @@ const COMPONENTS = [
     ...COMPONENTS,
     HighlightedRelevantDirective,
     DurationPipe,
+    OrderByDatePipe,
   ],
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ const COMPONENTS = [
     FontAwesomeModule,
     HighlightedRelevantDirective,
     DurationPipe,
+    OrderByDatePipe,
   ],
 })
 export class UiModule { }
