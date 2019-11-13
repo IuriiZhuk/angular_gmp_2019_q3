@@ -13,6 +13,7 @@ import { HighlightedRelevantDirective } from './directives/highlighted-relevant.
 /* Pipes */
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -22,13 +23,18 @@ const COMPONENTS = [
   LogoComponent,
 ];
 
+const PIPES = [
+  DurationPipe,
+  OrderByDatePipe,
+  FilterPipe,
+];
+
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
+    ...PIPES,
     HighlightedRelevantDirective,
-    DurationPipe,
-    OrderByDatePipe,
   ],
   imports: [
     CommonModule,
@@ -37,10 +43,12 @@ const COMPONENTS = [
   ],
   exports: [
     ...COMPONENTS,
+    ...PIPES,
     FontAwesomeModule,
     HighlightedRelevantDirective,
-    DurationPipe,
-    OrderByDatePipe,
+  ],
+  providers: [
+    ...PIPES,
   ],
 })
 export class UiModule { }
