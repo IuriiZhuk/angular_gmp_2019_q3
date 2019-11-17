@@ -3,6 +3,9 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { CourseDetailsComponent } from './course-details.component';
 import { Course } from '../../models/course';
+import { HighlightedRelevantDirective } from 'src/app/ui/directives/highlighted-relevant.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DurationPipe } from 'src/app/ui/pipes/duration.pipe';
 
 describe(`CourseDetailsComponent`, () => {
 
@@ -13,8 +16,8 @@ describe(`CourseDetailsComponent`, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [],
-      declarations: [CourseDetailsComponent],
+      imports: [FontAwesomeModule],
+      declarations: [CourseDetailsComponent, HighlightedRelevantDirective, DurationPipe],
       providers: [],
     });
 
@@ -33,14 +36,14 @@ describe(`CourseDetailsComponent`, () => {
   });
 
   it('should display title after detectChanges()', () => {
-    component.course = new Course('1', 'Test Course', '1-1-1', '60', 'test description');
+    component.course = new Course('1', 'Test Course', '1-1-1', 58, false, 'test description');
     fixture.detectChanges();
-    expect(el.textContent).toContain(component.course.title);
+    expect(el.textContent).toContain(component.course.title.toUpperCase());
   });
 
   it('should raise selected event when clicked', () => {
     let deletedCourseId: string;
-    component.course = new Course('1', 'Test Course', '1-1-1', '60', 'test description');
+    component.course = new Course('1', 'Test Course', '1-1-1', 58, false, 'test description');
 
     fixture.detectChanges();
     de = fixture.debugElement.query(By.css('button.button.course-details__action.course-details__delete'));

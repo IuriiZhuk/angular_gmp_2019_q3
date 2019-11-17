@@ -7,6 +7,13 @@ import { MainFooterComponent } from './main-footer/main-footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { LogoComponent } from './logo/logo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+/* Directives */
+import { HighlightedRelevantDirective } from './directives/highlighted-relevant.directive';
+/* Pipes */
+import { DurationPipe } from './pipes/duration.pipe';
+import { OrderByDatePipe } from './pipes/order-by-date.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -16,17 +23,32 @@ const COMPONENTS = [
   LogoComponent,
 ];
 
+const PIPES = [
+  DurationPipe,
+  OrderByDatePipe,
+  FilterPipe,
+];
+
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
+    ...PIPES,
+    HighlightedRelevantDirective,
   ],
   imports: [
     CommonModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   exports: [
     ...COMPONENTS,
+    ...PIPES,
+    FontAwesomeModule,
+    HighlightedRelevantDirective,
+  ],
+  providers: [
+    ...PIPES,
   ],
 })
 export class UiModule { }

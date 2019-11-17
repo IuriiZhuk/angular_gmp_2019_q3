@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { CourseDetailsComponent } from './course-details.component';
 import { Course } from '../../models/course';
+import { HighlightedRelevantDirective } from 'src/app/ui/directives/highlighted-relevant.directive';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DurationPipe } from 'src/app/ui/pipes/duration.pipe';
 
 /**
  * Test Host Component
@@ -14,7 +17,7 @@ import { Course } from '../../models/course';
   `
 })
 class TestHostComponent {
-  course = new Course('1', 'Test Course', '1-1-1', '60', 'test description');
+  course = new Course('1', 'Test Course', '1-1-1', 89, false, 'test description');
   onDeleteHandler(id: string): void {
     console.log(id);
   }
@@ -27,7 +30,8 @@ describe(`CourseDetailsComponent when inside a test host`, () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, CourseDetailsComponent],
+      imports: [FontAwesomeModule],
+      declarations: [TestHostComponent, CourseDetailsComponent, HighlightedRelevantDirective, DurationPipe],
     });
 
     fixture = TestBed.createComponent(TestHostComponent);
