@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ICourse } from '../../models/course';
 
 @Component({
@@ -6,14 +6,15 @@ import { ICourse } from '../../models/course';
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss']
 })
-export class CourseListComponent{
+export class CourseListComponent {
 
   @Input() public mockCourses: ICourse[];
+  @Output() public deleteCourseId = new EventEmitter<string>(true);
   constructor() { }
 
 
   public onDeleteHandler(id: string): void {
-    console.log(id);
+    this.deleteCourseId.emit(id);
   }
 
   public onLoadMoreHandler(): void {
