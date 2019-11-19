@@ -14,7 +14,10 @@ export class CourseListComponent {
 
 
   public onDeleteHandler(id: string): void {
-    this.deleteCourseId.emit(id);
+    const answer = confirm(`Do you really want to delete this course?`);
+    if (answer) {
+      this.deleteCourseId.emit(id);
+    }
   }
 
   public onLoadMoreHandler(): void {
