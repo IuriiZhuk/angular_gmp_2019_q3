@@ -1,0 +1,30 @@
+<div class="login-form__wrapper">
+  <form class="login-form">
+    <h2 class="login-form__title">Login</h2>
+    <label class = "login-form__label login-form__label--email" for="form-email">E-mail:
+    </label>
+    <input 
+      class="login-form__input login-form__input--email"
+      #inputEmail
+      type="text" 
+      name="email" 
+      id="form-email" 
+      [(ngModel)]="emailValue"
+      placeholder="Enter e-mail">
+    <label class = "login-form__label login-form__label--password" for="form-password">Password:
+    </label>
+    <input 
+      class = "login-form__input login-form__input--password"
+      #inputPassword
+      type="text" 
+      name="password" 
+      id="form-password" 
+      [(ngModel)]="passwordValue"
+      placeholder="Enter paword">
+
+    <div class="login-form__actions">
+      <a href="#" class="login-form__forgot-password"> Forgot Password</a>
+      <button class="login-form__button" (click)="onSubmit()">Login</button>
+    </div>
+  </form>
+</div>
