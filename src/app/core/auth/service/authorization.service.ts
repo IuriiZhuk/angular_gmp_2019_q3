@@ -39,7 +39,9 @@ export class AuthorizationService {
   public isAuthenticated(): boolean {
     return this.mockUser.isAuth;
   }
-  public getUserInfo(): IUser {
-    return this.mockUser;
+  public getUserInfo(): AuthUser {
+    const user = localStorage.getItem(this.mockUser.id);
+    const result = user ? JSON.parse(localStorage.getItem(this.mockUser.id)) : null ;
+    return result;
   }
 }
