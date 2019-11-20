@@ -1,10 +1,8 @@
-<div class="logo-wrapper">
-  <app-logo></app-logo>
-</div>
+<app-logo></app-logo>
 
 <div class="user-auth-info">
-  <span class="user-name">
-    Name
+  <span class="user-name" *ngIf="authUser?.isAuth">
+    {{authUser.firstName | uppercase}}
   </span>
-  <button class="user-auth">Log Off</button>
+  <button class="user-auth" (click)="onLoginHandler()">{{isAuth ? 'Log Off' : 'Log in'}}</button>
 </div>
