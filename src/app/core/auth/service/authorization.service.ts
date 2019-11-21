@@ -6,7 +6,7 @@ import { IUser, AuthUser, UserCredential } from '../../models/user';
 })
 export class AuthorizationService {
 
-  private mockUser: AuthUser = {
+  public mockUser: AuthUser = {
     id: 'mockUserId',
     firstName: 'firstName',
     lastName: 'lastName',
