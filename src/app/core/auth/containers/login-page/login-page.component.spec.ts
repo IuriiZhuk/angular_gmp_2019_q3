@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginPageComponent } from './login-page.component';
+import { LoginFormComponent } from '../../components/login-form/login-form.component';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -8,7 +11,11 @@ describe('LoginPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ]
+      declarations: [ LoginPageComponent, LoginFormComponent, ],
+      imports: [ FormsModule ],
+      providers: [
+        { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } },
+      ],
     })
     .compileComponents();
   }));

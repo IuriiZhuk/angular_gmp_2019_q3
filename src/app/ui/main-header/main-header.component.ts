@@ -18,7 +18,6 @@ export class MainHeaderComponent implements OnInit, DoCheck{
   ) { }
 
   public ngOnInit() {
-    console.log(`mainheader onInit`);
     this.authUser = this.auth.getUserInfo();
     this.isAuth = this.authUser && this.authUser.isAuth || false;
   }

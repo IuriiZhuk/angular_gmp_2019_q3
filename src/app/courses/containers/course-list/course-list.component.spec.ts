@@ -30,9 +30,20 @@ describe('CourseListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should onDeleteHandler set id in console', () => {
+  it('should onDeleteHandler delet course', () => {
+    spyOn(window, 'confirm').and.returnValue(true);
+    spyOn(component.deleteCourseId, 'emit');
     component.onDeleteHandler('id');
-    expect(console.log).toHaveBeenCalledWith('id');
+    expect(component.deleteCourseId.emit).toHaveBeenCalled();
+
+  });
+
+  it('should not  onDeleteHandler delet course', () => {
+    spyOn(window, 'confirm').and.returnValue(false);
+    spyOn(component.deleteCourseId, 'emit');
+    component.onDeleteHandler('id');
+    expect(component.deleteCourseId.emit).not.toHaveBeenCalled();
+
   });
 
   it('should onLoadMoreHandler set message in console', () => {
