@@ -6,7 +6,7 @@ import { Course, ICourse } from '../models/course';
 })
 export class CoursesService {
 
-  private coursesList: ICourse[] = [
+  public coursesList: ICourse[] = [
     new Course('1', 'Video Course 1. Name tag', '10 Nov, 2019', 90, false,
      `Learn about where you can find course descriptions,
      what information they include, how they work, and details
