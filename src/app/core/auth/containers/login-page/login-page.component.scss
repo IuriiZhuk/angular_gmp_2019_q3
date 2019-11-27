@@ -1,0 +1,10 @@
+@import '../../../../../styles/colors';
+
+.login-form-container {
+  height: 100%;
+  width: 100%;
+  background-color: $pale-grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

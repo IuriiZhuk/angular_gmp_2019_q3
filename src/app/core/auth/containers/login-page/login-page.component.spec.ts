@@ -1,15 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LogoComponent } from './logo.component';
+import { LoginPageComponent } from './login-page.component';
+import { LoginFormComponent } from '../../components/login-form/login-form.component';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
-describe('LogoComponent', () => {
-  let component: LogoComponent;
-  let fixture: ComponentFixture<LogoComponent>;
+describe('LoginPageComponent', () => {
+  let component: LoginPageComponent;
+  let fixture: ComponentFixture<LoginPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoComponent ],
+      declarations: [ LoginPageComponent, LoginFormComponent, ],
+      imports: [ FormsModule ],
       providers: [
         { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } },
       ],
@@ -18,7 +21,7 @@ describe('LogoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LogoComponent);
+    fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

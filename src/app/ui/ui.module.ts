@@ -14,6 +14,7 @@ import { HighlightedRelevantDirective } from './directives/highlighted-relevant.
 import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { AuthModule } from '../core/auth/auth.module';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -40,6 +41,7 @@ const PIPES = [
     CommonModule,
     FormsModule,
     FontAwesomeModule,
+    AuthModule,
   ],
   exports: [
     ...COMPONENTS,

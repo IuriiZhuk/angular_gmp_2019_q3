@@ -1,0 +1,33 @@
+@import '../../../../../styles/colors';
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  
+  &__wrapper {
+    background-color: $white;
+    padding: 24px;
+    width: 370px;
+    height: 280px;
+  }
+  
+  &__label {
+    margin-bottom: 8px;
+  }
+
+  &__input {
+    padding: 6px 12px;
+    margin-bottom: 8px;
+
+    &--password {
+      margin-bottom: 40px;
+    }
+  }
+  
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+}
