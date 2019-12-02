@@ -1,0 +1,86 @@
+@import '../../../../styles/colors';
+
+:host {
+  background: $pale-grey;
+}
+
+.course {
+  &__wrapper {
+    background: $white;
+    width: 730px;
+    margin: 24px auto;
+    padding: 24px;
+
+  }
+
+  &__form {
+    color: $slate-grey;
+  }
+
+  &__header {
+    margin-bottom: 22px;
+  }
+
+  &__input {
+    border: 1px solid $pale-grey;
+    border-radius: 3px;
+    background-color: $white;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+    
+    &--title, &--description {
+      width: 100%
+    }
+
+    &--duration, &--date {
+      width: 33%;
+    }
+  
+    &--authors {
+      width: 50%;
+    }
+
+  }
+
+  &__label-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &__title, &__description {
+    width: 100%;
+  }
+
+  &__duration, &__date {
+    width: 33%;
+  }
+
+  &__authors {
+    width: 50%;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    color: $slate-grey;
+  }
+    
+  &__button {
+    font-size: 14px;
+    height: 36px;
+    padding: 0  16px;
+
+    &--cancel {
+      margin-right: 12px;
+      
+      background: $pale-grey;
+    }
+
+    &--save {
+      background-color: $sick-green;
+      color: $white;
+    }
+  }
+
+}

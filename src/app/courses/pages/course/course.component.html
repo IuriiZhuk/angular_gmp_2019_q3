@@ -1,1 +1,49 @@
-<p>course works!</p>
+<div class="course__wrapper">
+  <form class="course__form">
+    <h2 class="course__header">NewCourse</h2>
+    <!-- Form Input block start -->
+    <div class="course__label-block course__title">
+      <label for="title" class="course__title">Title: </label>
+      <span class="course__required">*required</span>
+    </div>
+    <input type="text" name="title" class="course__input course__input--title">
+    <!-- Form Input block end -->
+
+     <!-- Form Input block start -->
+    <div class="course__label-block course__description">
+      <label for="title" class="course__description">Description: </label>
+      <span class="course__required">*required</span>
+    </div>
+    <textarea type="text" name="description" class="course__input course__input--description"></textarea>
+    <!-- Form Input block end -->
+
+     <!-- Form Input block start -->
+    <div class="course__label-block course__duration">
+      <label for="title" class="course__duration">Duration: </label>
+      <span class="course__required">*required</span>
+    </div>
+    <input type="text" name="duration" class="course__input course__input--duration">
+    <!-- Form Input block end -->
+
+     <!-- Form Input block start -->
+    <div class="course__label-block course__date">
+      <label for="date" class="course__date">Date:</label>
+      <span class="course__required">*required</span>
+    </div>
+    <input type="date" name="date" class="course__input course__input--date">
+    <!-- Form Input block end -->
+
+    <!-- Form Input block start -->
+    <div class="course__label-block course__authors">
+      <label for="authors" class="course__date">Authors:</label>
+      <span class="course__required">*required</span>
+    </div>
+    <input type="authors" name="authors" class="course__input course__input--authors">
+    <!-- Form Input block end -->
+
+    <div class="course__buttons">
+      <button type="submit" class="button course__button course__button--cancel">Cancel</button>
+      <button type="submit" class="button course__button course__button--save">Save</button>
+    </div>
+  </form>
+</div>

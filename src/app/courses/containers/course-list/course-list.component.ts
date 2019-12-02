@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ICourse } from '../../models/course';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -10,7 +11,9 @@ export class CourseListComponent {
 
   @Input() public mockCourses: ICourse[];
   @Output() public deleteCourseId = new EventEmitter<string>(true);
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
 
   public onDeleteHandler(id: string): void {
@@ -22,6 +25,10 @@ export class CourseListComponent {
 
   public onLoadMoreHandler(): void {
     console.log('Load More Pressed');
+  }
+
+  public onAddHandle(): void {
+    this.router.navigate(['/add']);
   }
 
 }
