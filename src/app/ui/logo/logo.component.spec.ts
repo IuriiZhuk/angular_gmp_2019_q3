@@ -6,12 +6,15 @@ import { Router } from '@angular/router';
 describe('LogoComponent', () => {
   let component: LogoComponent;
   let fixture: ComponentFixture<LogoComponent>;
+  const router = {
+    navigate: jasmine.createSpy('navigate')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LogoComponent ],
       providers: [
-        { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } },
+        { provide: Router, useValue: router },
       ],
     })
     .compileComponents();
@@ -25,5 +28,10 @@ describe('LogoComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it(`should navigate to home page`, () => {
+    component.onClickHandler();
+    expect(router.navigate).toHaveBeenCalledWith(['']);
   });
 });
