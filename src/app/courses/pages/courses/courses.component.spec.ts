@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from 'src/app/ui/pipes/filter.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DurationPipe } from 'src/app/ui/pipes/duration.pipe';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -30,7 +31,7 @@ describe('CoursesComponent', () => {
         HighlightedRelevantDirective,
         DurationPipe,
       ],
-      imports: [FormsModule, FontAwesomeModule],
+      imports: [FormsModule, FontAwesomeModule, RouterTestingModule],
       providers: [{provide: FilterPipe, useValue: filterPipeStub }],
     })
     .compileComponents();

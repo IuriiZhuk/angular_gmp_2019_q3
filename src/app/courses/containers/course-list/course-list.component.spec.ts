@@ -6,15 +6,30 @@ import { OrderByDatePipe } from 'src/app/ui/pipes/order-by-date.pipe';
 import { HighlightedRelevantDirective } from 'src/app/ui/directives/highlighted-relevant.directive';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DurationPipe } from 'src/app/ui/pipes/duration.pipe';
+import { Router } from '@angular/router';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
   let fixture: ComponentFixture<CourseListComponent>;
+  const router = {
+    navigate: jasmine.createSpy('navigate')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FontAwesomeModule],
-      declarations: [ CourseListComponent, CourseDetailsComponent, OrderByDatePipe, HighlightedRelevantDirective, DurationPipe ]
+      imports: [
+        FontAwesomeModule,
+      ],
+      declarations: [
+        CourseListComponent,
+        CourseDetailsComponent,
+        OrderByDatePipe,
+        HighlightedRelevantDirective,
+        DurationPipe,
+      ],
+      providers: [
+       { provide: Router, useValue: router },
+      ],
     })
     .compileComponents();
   }));
@@ -49,6 +64,11 @@ describe('CourseListComponent', () => {
   it('should onLoadMoreHandler set message in console', () => {
     component.onLoadMoreHandler();
     expect(console.log).toHaveBeenCalledWith('Load More Pressed');
+  });
+
+  it(`should navigate to course`, () => {
+    component.onAddHandle();
+    expect(router.navigate).toHaveBeenCalledWith(['/add']);
   });
 
 });

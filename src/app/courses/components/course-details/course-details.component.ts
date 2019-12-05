@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { ICourse } from '../../models/course';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.scss']
+  styleUrls: ['./course-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CourseDetailsComponent implements OnInit {
 
