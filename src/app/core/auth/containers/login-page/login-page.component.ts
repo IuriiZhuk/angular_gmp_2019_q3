@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
+  public msg = '';
+
   constructor(
     private auth: AuthorizationService,
     private router: Router,
@@ -18,10 +20,15 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleOnSubmit(data: UserCredential) {
-    this.auth.logIn(data);
-    alert(`You are successfully login`);
-    this.router.navigate(['']);
+  handleOnSubmit({email, password}: UserCredential) {
+
+    const output = this.auth.checkUsernameAndPassword(email, password);
+    if (output) {
+      alert(`You are successfully login`);
+      this.router.navigate(['/courses']);
+    } else {
+      this.msg ='Invalid username or password';
+    }
   }
 
 }
