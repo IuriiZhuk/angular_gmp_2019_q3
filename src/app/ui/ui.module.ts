@@ -15,6 +15,7 @@ import { DurationPipe } from './pipes/duration.pipe';
 import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthModule } from '../core/auth/auth.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -22,6 +23,7 @@ const COMPONENTS = [
   BreadcrumbsComponent,
   SearchBarComponent,
   LogoComponent,
+  NotFoundComponent,
 ];
 
 const PIPES = [
@@ -36,6 +38,7 @@ const PIPES = [
     ...COMPONENTS,
     ...PIPES,
     HighlightedRelevantDirective,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,
