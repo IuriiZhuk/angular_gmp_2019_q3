@@ -12,11 +12,11 @@
       <span class="course-details__date">{{course.creationDate | date: 'longDate'}}</span>
     </div>
   </div>
-  
+
   <div class="course-details__content">
     <p class="course-details__description">{{course.description}}</p>
     <div class="course-details__buttons">
-      <button class="button course-details__action course-details__edit">Edit</button>
+      <button class="button course-details__action course-details__edit" (click)="onEditHandler(course.id)">Edit</button>
       <button class="button course-details__action course-details__delete" (click)="onDeleteHandler(course.id)">Delete</button>
     </div>
   </div>

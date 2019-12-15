@@ -4,7 +4,6 @@ import { LoginPageComponent } from './core/auth/containers/login-page/login-page
 import { AuthGuard } from './core/auth/guard/auth.guard';
 import { NotFoundComponent } from './ui/not-found/not-found.component';
 
-
 const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full', canActivate: [AuthGuard]},
   { path: 'login', component: LoginPageComponent},

@@ -6,7 +6,7 @@
       <label for="title" class="course__title">Title: </label>
       <span class="course__required">*required</span>
     </div>
-    <input type="text" name="title" class="course__input course__input--title">
+    <input type="text" name="title" class="course__input course__input--title" [(ngModel)]="course.title">
     <!-- Form Input block end -->
 
      <!-- Form Input block start -->
@@ -14,7 +14,7 @@
       <label for="title" class="course__description">Description: </label>
       <span class="course__required">*required</span>
     </div>
-    <textarea type="text" name="description" class="course__input course__input--description"></textarea>
+    <textarea type="text" name="description" rows="7" class="course__input course__input--description" [(ngModel)]="course.description"></textarea>
     <!-- Form Input block end -->
 
      <!-- Form Input block start -->
@@ -22,7 +22,7 @@
       <label for="title" class="course__duration">Duration: </label>
       <span class="course__required">*required</span>
     </div>
-    <input type="number" name="duration" class="course__input course__input--duration">
+    <input type="number" name="duration" class="course__input course__input--duration" [(ngModel)]="course.duration">
     <!-- Form Input block end -->
 
      <!-- Form Input block start -->
@@ -30,7 +30,7 @@
       <label for="date" class="course__date">Date:</label>
       <span class="course__required">*required</span>
     </div>
-    <input type="date" name="date" class="course__input course__input--date">
+    <input type="date" name="date" class="course__input course__input--date" [(ngModel)]="course.creationDate">
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
@@ -42,8 +42,9 @@
     <!-- Form Input block end -->
 
     <div class="course__buttons">
-      <button type="reset" class="button course__button course__button--cancel">Cancel</button>
-      <button type="submit" class="button course__button course__button--save">Save</button>
+      <button type="reset" class="button course__button course__button--cancel" (click)="onCancelHandler()">Cancel</button>
+      <button type="submit" class="button course__button course__button--save"  (click)="onSaveHandler()">Save</button>
     </div>
   </form>
 </div>
+b

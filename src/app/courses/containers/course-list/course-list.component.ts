@@ -28,7 +28,7 @@ export class CourseListComponent {
   }
 
   public onAddHandle(): void {
-    this.router.navigate(['/add']);
+    this.router.navigate(['courses/add']);
   }
 
 }

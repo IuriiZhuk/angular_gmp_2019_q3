@@ -7,6 +7,7 @@ import { CourseDetailsComponent } from './components/course-details/course-detai
 import { UiModule } from '../ui/ui.module';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CoursesRoutingModule } from './courses-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,12 +17,13 @@ import { CoursesRoutingModule } from './courses-routing.module';
     CourseComponent,
     CourseListComponent,
     CourseDetailsComponent,
-    MainPageComponent
+    MainPageComponent,
   ],
   imports: [
     CommonModule,
     UiModule,
     CoursesRoutingModule,
+    FormsModule,
   ],
   exports: [
     MainPageComponent,

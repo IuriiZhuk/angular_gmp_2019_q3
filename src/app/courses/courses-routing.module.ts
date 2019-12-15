@@ -7,7 +7,7 @@ import { CoursesComponent } from './pages/courses/courses.component';
 
 
 const coursesRoutes: Routes = [
-  { path: 'courses', component: MainPageComponent, pathMatch: 'full', children: [
+  { path: 'courses', component: MainPageComponent, children: [
       { path: '', component: CoursesComponent },
       { path: ':id', component: CourseComponent },
       { path: 'new', component: CourseComponent },

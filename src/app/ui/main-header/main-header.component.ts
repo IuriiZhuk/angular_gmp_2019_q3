@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class MainHeaderComponent implements OnInit {
 
-  public authUser: AuthUser;
+  public authUser;
   public isAuth: boolean;
   constructor(
     private auth: AuthorizationService,
@@ -22,7 +22,7 @@ export class MainHeaderComponent implements OnInit {
   public ngOnInit() {
 
     this.isAuth = this.auth.isAuthenticated();
-    console.log(`header, onInit`, this.isAuth);
+    this.authUser = this.auth.getUserInfo();
   }
 
 

@@ -26,42 +26,8 @@ export class AuthorizationService {
     return localStorage.getItem('username') ? true : false;
   }
 
-  // public mockUser: AuthUser = {
-  //   id: 'mockUserId',
-  //   firstName: 'firstName',
-  //   lastName: 'lastName',
-  //   isAuth: false,
-  //   email: '',
-  //   password: '',
-  // };
+   public getUserInfo(): string {
+     return localStorage.getItem('username');
+  }
 
-  // constructor() { }
-
-  // public logIn(userCredentional: UserCredential) {
-  //   const user: AuthUser = {
-  //     ...this.mockUser,
-  //     ...userCredentional,
-  //     isAuth: !this.mockUser.isAuth,
-  //   };
-  //   this.mockUser = {
-  //     ... user,
-  //   };
-  //   localStorage.setItem(this.mockUser.id, JSON.stringify(user));
-  // }
-
-  // public logOut() {
-  //   const user = localStorage.getItem(this.mockUser.id);
-  //   if (user) {
-  //     localStorage.removeItem(this.mockUser.id);
-  //   }
-  // }
-
-  // public isAuthenticated(): boolean {
-  //   return this.mockUser.isAuth;
-  // }
-  // public getUserInfo(): AuthUser {
-  //   const user = localStorage.getItem(this.mockUser.id);
-  //   const result = user ? JSON.parse(localStorage.getItem(this.mockUser.id)) : null ;
-  //   return result;
-  // }
 }

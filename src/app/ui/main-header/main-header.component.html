@@ -2,7 +2,7 @@
 
 <div class="user-auth-info">
   <span class="user-name" *ngIf="isAuth">
-    {{isAuth}}
+    {{authUser}}
   </span>
   <button class="user-auth" (click)="onLoginHandler()">{{isAuth ? 'Log Off' : 'Log in'}}</button>
 </div>
