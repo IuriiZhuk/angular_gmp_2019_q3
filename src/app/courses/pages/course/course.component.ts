@@ -46,12 +46,14 @@ export class CourseComponent implements OnInit {
 
   public onCancelHandler() {
     this.location.back();
+    this.router.navigate(['/courses']);
   }
 
   public onSaveHandler() {
     this.isAdd ?
       this.courseService.addCourse(this.course) :
       this.courseService.updateCourseById(this.id, this.course);
+    this.router.navigate(['/courses']);
   }
 
 }
