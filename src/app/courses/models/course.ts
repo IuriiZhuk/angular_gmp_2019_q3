@@ -18,3 +18,8 @@ export class Course implements ICourse {
 
     }
 }
+
+export interface IAuthor {
+  id: number;
+  name: string;
+}
