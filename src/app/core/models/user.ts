@@ -11,19 +11,16 @@ export interface AuthUser extends IUser {
   password: string;
 }
 
-export interface UserCredential {
-  email: string;
-  password: string;
-}
 
-// export class User implements IUser {
-//   constructor(
-//     public id: string,
-//     public firstName: string,
-//     public lastName: string,
-//     public isAuth: boolean,
-//     ) { }
-// }
+export class User implements IUser {
+  constructor(
+    public id: number,
+    public token: string,
+    public name: NameModel,
+    public login: string,
+    public password: string,
+    ) { }
+}
 
 export interface LoginRequestModel {
   login: string;

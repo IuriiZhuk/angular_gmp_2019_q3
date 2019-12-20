@@ -2,6 +2,8 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ICourse } from '../../models/course';
 import { FilterPipe } from 'src/app/ui/pipes/filter.pipe';
 import { CoursesService } from '../../services/courses.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses',
@@ -11,27 +13,25 @@ import { CoursesService } from '../../services/courses.service';
 export class CoursesComponent implements OnInit {
   public searchValue: string;
   public filteredMockCourses: ICourse[];
-  public courses: ICourse[] ;
+  public courses$: Observable<ICourse[]> ;
 
   constructor(private filterPipe: FilterPipe,
               private courseService: CoursesService,
               ) { }
 
   ngOnInit() {
-    this.courses = this.courseService.getAllCourses();
-    this.filteredMockCourses = this.courses;
+    this.courses$ = this.courseService.getCourses();
   }
 
-  public onSearchHandler(value: string) {
-    this.courses = this.courseService.getAllCourses();
-    this.filteredMockCourses = [...this.filterPipe.transform(this.courses, value)];
-  }
+  // public onSearchHandler(value: string) {
+  //   this.courses$.pipe(
+  //     map( course)
+  //   );
+  //   this.filteredMockCourses = [...this.filterPipe.transform(this.courses, value)];
+  // }
 
-  public onDeleteHandler(id: string) {
+  public onDeleteHandler(id: number) {
     this.courseService.deleteCourseById(id);
-    this.filteredMockCourses = this.courseService.getAllCourses();
   }
-
-
 
 }
