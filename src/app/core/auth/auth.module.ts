@@ -14,6 +14,6 @@ import { AuthorizationService } from './service/authorization.service';
     FormsModule,
   ],
   providers: [ AuthorizationService ],
-  exports: [ LoginPageComponent ],
+  exports: [ LoginPageComponent],
 })
 export class AuthModule { }
