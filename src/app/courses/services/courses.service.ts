@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ICourse} from '../models/course';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class CoursesService {
   ) {
   }
 
-  private BASE_URL = 'localhost:3200';
+  private BASE_URL = 'http://localhost:3004';
 
   public getCourses(): Observable<ICourse[]> {
     const url = `${this.BASE_URL}/courses`;
@@ -43,6 +43,16 @@ export class CoursesService {
   public getErrorTestCourses(): Observable<void> {
     const url = `${this.BASE_URL}/error`;
     return this.http.get<void>(url);
+  }
+
+  public searchCourses(term: string): Observable<ICourse[]> {
+    const url = `${this.BASE_URL}/courses`;
+
+    return this.http.get<ICourse[]>(`${url}`, {
+      params: {
+        textFragment: term.toUpperCase(),
+      }
+    });
   }
 
 }

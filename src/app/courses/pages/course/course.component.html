@@ -6,7 +6,7 @@
       <label for="title" class="course__title">Title: </label>
       <span class="course__required">*required</span>
     </div>
-    <input type="text" name="title" class="course__input course__input--title" [(ngModel)]="course.title">
+    <input type="text" name="title" class="course__input course__input--title" [(ngModel)]="course.name">
     <!-- Form Input block end -->
 
      <!-- Form Input block start -->
@@ -22,7 +22,7 @@
       <label for="title" class="course__duration">Duration: </label>
       <span class="course__required">*required</span>
     </div>
-    <input type="number" name="duration" class="course__input course__input--duration" [(ngModel)]="course.duration">
+    <input type="number" name="duration" class="course__input course__input--duration" [(ngModel)]="course.length">
     <!-- Form Input block end -->
 
      <!-- Form Input block start -->
@@ -30,7 +30,7 @@
       <label for="date" class="course__date">Date:</label>
       <span class="course__required">*required</span>
     </div>
-    <input type="date" name="date" class="course__input course__input--date" [(ngModel)]="course.creationDate">
+    <input type="date" name="date" class="course__input course__input--date" [(ngModel)]="course.date">
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
@@ -47,4 +47,4 @@
     </div>
   </form>
 </div>
-b
+

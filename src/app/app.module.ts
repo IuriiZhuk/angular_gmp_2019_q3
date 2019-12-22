@@ -7,6 +7,7 @@ import { UiModule } from './ui/ui.module';
 import { CoursesModule } from './courses/courses.module';
 import { AuthModule } from './core/auth/auth.module';
 import { AuthGuard } from './core/auth/guard/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AuthGuard } from './core/auth/guard/auth.guard';
     CoursesModule,
     UiModule,
     AuthModule,
+    HttpClientModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

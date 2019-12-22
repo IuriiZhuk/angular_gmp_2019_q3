@@ -9,14 +9,14 @@ import { Router } from '@angular/router';
 })
 export class CourseListComponent {
 
-  @Input() public mockCourses: ICourse[];
-  @Output() public deleteCourseId = new EventEmitter<string>(true);
+  @Input() public courses: ICourse[];
+  @Output() public deleteCourseId = new EventEmitter<number>(true);
   constructor(
     private router: Router,
   ) { }
 
 
-  public onDeleteHandler(id: string): void {
+  public onDeleteHandler(id: number): void {
     const answer = confirm(`Do you really want to delete this course?`);
     if (answer) {
       this.deleteCourseId.emit(id);

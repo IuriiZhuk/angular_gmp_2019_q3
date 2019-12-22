@@ -16,7 +16,6 @@ export class SearchBarComponent implements OnInit {
   public onSearchHandler(inputValue: string) {
     console.log(inputValue);
     this.searchValue.emit(inputValue);
-    this.inputValue = '';
   }
 
 }
