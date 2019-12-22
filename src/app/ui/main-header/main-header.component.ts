@@ -20,15 +20,7 @@ export class MainHeaderComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-
-    this.isAuth = this.auth.isAuthenticated();
-    this.authUser = this.auth.getUserInfo();
   }
 
 
-  public onLoginHandler() {
-    this.auth.logOut();
-    this.router.navigate(['/login']);
-    this.cdRef.detectChanges();
-  }
 }

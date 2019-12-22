@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationService } from '../../service/authorization.service';
-import { UserCredential } from 'src/app/core/models/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,17 +17,6 @@ export class LoginPageComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-  }
-
-  handleOnSubmit({email, password}: UserCredential) {
-
-    const output = this.auth.checkUsernameAndPassword(email, password);
-    if (output) {
-      alert(`You are successfully login`);
-      this.router.navigate(['/courses']);
-    } else {
-      this.msg ='Invalid username or password';
-    }
   }
 
 }

@@ -17,18 +17,18 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.breadcrumbs = ['Courses'];
-    this.router.events
-      .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
-      .subscribe( () => {
-        console.log(`NavigationEnd`);
-        const courseId = this.activatedRoute.snapshot.params.id;
-        console.log(`courseId`, courseId);
-        if (courseId) {
-          const courseTitle: string = this.courseService.getCourseById(courseId).title;
-          this.breadcrumbs.push(courseTitle);
-        }
-      });
+    // this.breadcrumbs = ['Courses'];
+    // this.router.events
+    //   .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
+    //   .subscribe( () => {
+    //     console.log(`NavigationEnd`);
+    //     const courseId = this.activatedRoute.snapshot.params.id;
+    //     console.log(`courseId`, courseId);
+    //     if (courseId) {
+    //       const courseTitle: string = this.courseService.getCourseById(courseId).title;
+    //       this.breadcrumbs.push(courseTitle);
+    //     }
+    //   });
 
   }
 }
