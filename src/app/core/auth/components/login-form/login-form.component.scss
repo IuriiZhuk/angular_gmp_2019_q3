@@ -3,14 +3,14 @@
 .login-form{
   display: flex;
   flex-direction: column;
-  
+
   &__wrapper {
     background-color: $white;
     padding: 24px;
     width: 370px;
-    height: 280px;
+    min-height: 280px;
   }
-  
+
   &__label {
     margin-bottom: 8px;
   }
@@ -23,7 +23,7 @@
       margin-bottom: 40px;
     }
   }
-  
+
 
   &__actions {
     display: flex;

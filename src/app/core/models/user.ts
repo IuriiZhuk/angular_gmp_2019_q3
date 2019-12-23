@@ -32,6 +32,6 @@ export interface TokenRequestModel {
 }
 
 export interface NameModel {
-  firstName: string;
-  lastName: string;
+  first: string;
+  last: string;
 }

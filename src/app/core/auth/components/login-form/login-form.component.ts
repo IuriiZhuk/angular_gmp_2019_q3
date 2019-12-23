@@ -1,22 +1,43 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {Component} from '@angular/core';
+import {AuthorizationService} from '../../service/authorization.service';
+import {LoginRequestModel, TokenRequestModel} from '../../../models/user';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
-  public emailValue: string;
+export class LoginFormComponent {
+  public loginValue: string;
   public passwordValue: string;
+  public userCredentials: LoginRequestModel;
 
-  @Output() private login = new EventEmitter<any>(true);
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private authService: AuthorizationService,
+    private router: Router,
+  ) {
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
+    this.userCredentials = {
+      login: this.loginValue,
+      password: this.passwordValue,
+    };
+
+    this.authService.logIn(this.userCredentials).subscribe(
+      (token: TokenRequestModel) => {
+        this.authService.setTokenToLocalStorage(token);
+        this.router.navigate(['']);
+      },
+      (error: HttpErrorResponse) => {
+        this.passwordValue = '';
+        this.loginValue = '';
+        return alert(`${error.message}, :((( ,${error.statusText}`);
+      }
+    )
+    ;
   }
 
 }

@@ -1,25 +1,32 @@
-import { Component, OnInit, ChangeDetectorRef, OnChanges, AfterViewInit, DoCheck, ChangeDetectionStrategy} from '@angular/core';
-import { AuthorizationService } from 'src/app/core/auth/service/authorization.service';
-import { AuthUser } from 'src/app/core/models/user';
-import { Router } from '@angular/router';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AuthorizationService} from 'src/app/core/auth/service/authorization.service';
+import {IUser, TokenRequestModel} from 'src/app/core/models/user';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainHeaderComponent implements OnInit {
 
-  public authUser;
-  public isAuth: boolean;
+  public user$: Observable<IUser>;
+  public userToken: TokenRequestModel;
+
   constructor(
-    private auth: AuthorizationService,
+    private authService: AuthorizationService,
     private router: Router,
-    private cdRef: ChangeDetectorRef,
-  ) { }
+  ) {
+  }
 
   public ngOnInit() {
+    this.userToken = {token: this.authService.getUserTokenFromLocalStorage()};
+    this.user$ = this.authService.getUserInfo(this.userToken);
+  }
+
+  public onLoginHandler() {
+    this.router.navigate(['/login']);
   }
 
 
