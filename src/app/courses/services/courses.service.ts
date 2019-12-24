@@ -15,9 +15,15 @@ export class CoursesService {
 
   private BASE_URL = 'http://localhost:3004';
 
-  public getCourses(): Observable<ICourse[]> {
+  public getCourses(count = 4, term = ''): Observable<ICourse[]> {
     const url = `${this.BASE_URL}/courses`;
-    return this.http.get<ICourse[]>(url);
+    return this.http.get<ICourse[]>(url, {
+      params: {
+        textFragment: term.toUpperCase(),
+        start: `0`,
+        count: `${count}`,
+      }
+    });
   }
 
   public createCourse(newCourse: ICourse): Observable<ICourse[]> {

@@ -11,6 +11,7 @@ export class CourseListComponent {
 
   @Input() public courses: ICourse[];
   @Output() public deleteCourseId = new EventEmitter<number>(true);
+  @Output() public loadMore = new EventEmitter(true);
   constructor(
     private router: Router,
   ) { }
@@ -24,7 +25,7 @@ export class CourseListComponent {
   }
 
   public onLoadMoreHandler(): void {
-    console.log('Load More Pressed');
+    this.loadMore.emit();
   }
 
   public onAddHandle(): void {
