@@ -5,15 +5,10 @@ import { CourseComponent } from './pages/course/course.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { AuthGuard } from '../core/auth/guard/auth.guard';
 
-
-
 const coursesRoutes: Routes = [
-  { path: 'courses', component: MainPageComponent, canActivate: [AuthGuard],  children: [
-      { path: '', component: CoursesComponent, canActivateChild: [AuthGuard] },
+  {  path: '', component: CoursesComponent, canActivateChild: [AuthGuard] },
       { path: ':id', component: CourseComponent },
-      { path: 'new', component: CourseComponent },
-    ],
-  },
+      { path: 'new', component: CourseComponent }
 ];
 
 @NgModule({
