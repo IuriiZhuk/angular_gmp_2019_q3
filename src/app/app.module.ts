@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
 import { CoursesModule } from './courses/courses.module';
 import { AuthModule } from './core/auth/auth.module';
+import { AuthGuard } from './core/auth/guard/auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './core/auth/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,11 @@ import { AuthModule } from './core/auth/auth.module';
     CoursesModule,
     UiModule,
     AuthModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

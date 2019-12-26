@@ -1,26 +1,26 @@
 <div class="login-form__wrapper">
   <form class="login-form">
-    <h2 class="login-form__title">Login</h2>
-    <label class = "login-form__label login-form__label--email" for="form-email">E-mail:
+    <h2 class="login-form__title">Login form</h2>
+    <label class = "login-form__label login-form__label--email" for="form-login">Login:
     </label>
-    <input 
+    <input
       class="login-form__input login-form__input--email"
-      #inputEmail
-      type="text" 
-      name="email" 
-      id="form-email" 
-      [(ngModel)]="emailValue"
-      placeholder="Enter e-mail">
+      #inputLogin
+      type="text"
+      name="login"
+      id="form-login"
+      [(ngModel)]="loginValue"
+      placeholder="Enter login">
     <label class = "login-form__label login-form__label--password" for="form-password">Password:
     </label>
-    <input 
+    <input
       class = "login-form__input login-form__input--password"
       #inputPassword
-      type="text" 
-      name="password" 
-      id="form-password" 
+      type="text"
+      name="password"
+      id="form-password"
       [(ngModel)]="passwordValue"
-      placeholder="Enter paword">
+      placeholder="Enter password">
 
     <div class="login-form__actions">
       <a href="#" class="login-form__forgot-password"> Forgot Password</a>

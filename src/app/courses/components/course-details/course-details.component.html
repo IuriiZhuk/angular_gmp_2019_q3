@@ -1,22 +1,22 @@
-<div [appHighlightedRelevant]="course.creationDate" [ngClass]="{'course-details': true, 'course-details__top-rated': course.topRated }"
+<div [appHighlightedRelevant]="course.creationDate" [ngClass]="{'course-details': true, 'course-details__top-rated': course.isTopRated }"
 >
   <div class="course-details__header">
-    <h2 class="course-details__title">{{course.title | uppercase}}</h2>
+    <h2 class="course-details__title">{{course.name | uppercase}}</h2>
     <fa-icon
-      *ngIf="course.topRated"
+      *ngIf="course.isTopRated"
       class="course-details__top-rated-icon"
       [icon]="faStar">
     </fa-icon>
     <div class="course-details__timing">
-      <span class="course-details__duration">{{course.duration | duration}}</span>
-      <span class="course-details__date">{{course.creationDate | date: 'longDate'}}</span>
+      <span class="course-details__duration">{{course.length | duration}}</span>
+      <span class="course-details__date">{{course.date | date: 'longDate'}}</span>
     </div>
   </div>
-  
+
   <div class="course-details__content">
     <p class="course-details__description">{{course.description}}</p>
     <div class="course-details__buttons">
-      <button class="button course-details__action course-details__edit">Edit</button>
+      <button class="button course-details__action course-details__edit" (click)="onEditHandler(course.id)">Edit</button>
       <button class="button course-details__action course-details__delete" (click)="onDeleteHandler(course.id)">Delete</button>
     </div>
   </div>

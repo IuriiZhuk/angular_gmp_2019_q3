@@ -9,14 +9,15 @@ import { Router } from '@angular/router';
 })
 export class CourseListComponent {
 
-  @Input() public mockCourses: ICourse[];
-  @Output() public deleteCourseId = new EventEmitter<string>(true);
+  @Input() public courses: ICourse[];
+  @Output() public deleteCourseId = new EventEmitter<number>(true);
+  @Output() public loadMore = new EventEmitter(true);
   constructor(
     private router: Router,
   ) { }
 
 
-  public onDeleteHandler(id: string): void {
+  public onDeleteHandler(id: number): void {
     const answer = confirm(`Do you really want to delete this course?`);
     if (answer) {
       this.deleteCourseId.emit(id);
@@ -24,11 +25,11 @@ export class CourseListComponent {
   }
 
   public onLoadMoreHandler(): void {
-    console.log('Load More Pressed');
+    this.loadMore.emit();
   }
 
   public onAddHandle(): void {
-    this.router.navigate(['/add']);
+    this.router.navigate(['courses/add']);
   }
 
 }

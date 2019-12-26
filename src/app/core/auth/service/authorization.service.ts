@@ -1,47 +1,39 @@
-import { Injectable } from '@angular/core';
-import { IUser, AuthUser, UserCredential } from '../../models/user';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {IUser, LoginRequestModel, TokenRequestModel} from '../../models/user';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorizationService {
 
-  public mockUser: AuthUser = {
-    id: 'mockUserId',
-    firstName: 'firstName',
-    lastName: 'lastName',
-    isAuth: false,
-    email: '',
-    password: '',
-  };
-
-  constructor() { }
-
-  public logIn(userCredentional: UserCredential) {
-    const user: AuthUser = {
-      ...this.mockUser,
-      ...userCredentional,
-      isAuth: !this.mockUser.isAuth,
-    };
-    this.mockUser = {
-      ... user,
-    };
-    localStorage.setItem(this.mockUser.id, JSON.stringify(user));
+  constructor(
+    private http: HttpClient,
+  ) {
   }
 
-  public logOut() {
-    const user = localStorage.getItem(this.mockUser.id);
-    if (user) {
-      localStorage.removeItem(this.mockUser.id);
-    }
+  private BASE_URL = 'http://localhost:3004';
+
+  public logIn(userCred: LoginRequestModel): Observable<TokenRequestModel> {
+    const url = `${this.BASE_URL}/auth/login`;
+    return this.http.post<TokenRequestModel>(url, userCred);
   }
 
-  public isAuthenticated(): boolean {
-    return this.mockUser.isAuth;
+  public getUserInfo(token: TokenRequestModel): Observable<IUser> {
+    const url = `${this.BASE_URL}/auth/userinfo`;
+    return this.http.post<IUser>(url, token);
   }
-  public getUserInfo(): AuthUser {
-    const user = localStorage.getItem(this.mockUser.id);
-    const result = user ? JSON.parse(localStorage.getItem(this.mockUser.id)) : null ;
-    return result;
+
+  public setTokenToLocalStorage(authToken: TokenRequestModel): void {
+    localStorage.setItem('user', authToken.token);
+  }
+
+  public removeTokenFromLocalStorage(): void {
+    localStorage.removeItem('user');
+  }
+
+  public getUserTokenFromLocalStorage(): string {
+    return localStorage.getItem('user');
   }
 }

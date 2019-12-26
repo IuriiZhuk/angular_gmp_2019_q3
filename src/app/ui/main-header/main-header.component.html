@@ -1,8 +1,10 @@
 <app-logo></app-logo>
 
-<div class="user-auth-info">
-  <span class="user-name" *ngIf="authUser?.isAuth">
-    {{authUser.firstName | uppercase}}
+<div class="user-auth-info" *ngIf="user$ | async as user; else loading">
+   <span class="user-name" >
+    -{{user.name.first}}-
   </span>
-  <button class="user-auth" (click)="onLoginHandler()">{{isAuth ? 'Log Off' : 'Log in'}}</button>
+
+  <button class="user-auth" (click)="onLoginHandler()">{{user.name.first ? 'Log Off' : 'Log in'}}</button>
 </div>
+  <ng-template #loading>Loading Data...</ng-template>

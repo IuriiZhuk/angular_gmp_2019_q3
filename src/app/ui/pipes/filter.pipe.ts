@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 
   transform(courseArray: ICourse[], searchValue: string): any {
     if (!searchValue) { return courseArray; }
-    return courseArray.filter((course: ICourse) => course.title.includes(searchValue));
+    return courseArray.filter((course: ICourse) => course.name.includes(searchValue));
   }
 
 }

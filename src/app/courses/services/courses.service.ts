@@ -1,68 +1,66 @@
-import { Injectable } from '@angular/core';
-import { Course, ICourse } from '../models/course';
+import {Injectable} from '@angular/core';
+import {ICourse} from '../models/course';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
 
-  public coursesList: ICourse[] = [
-    new Course('1', 'Video Course 1. Name tag', '10 Nov, 2019', 90, false,
-     `Learn about where you can find course descriptions,
-     what information they include, how they work, and details
-      about various components of a course description. Course
-      descriptions report information about a university or
-      college's classes. They're published both in course
-      catalogs that outline degree requirements and in cours
-      schedules that contain descriptions for all courses offered
-      during a particular semester.`),
-      new Course('2', 'Video Course 2. Name tag', '9 Nov, 2018', 55, true,
-      `Learn about where you can find course descriptions,
-      what information they include, how they work, and details
-      about various components of a course description. Course
-      descriptions report information about a university or
-      college's classes. They're published both in course
-      catalogs that outline degree requirements and in cours
-      schedules that contain descriptions for all courses offered
-      during a particular semester.`),
-      new Course('3', 'Video Course 3. Name tag', '21 Dec, 2019', 400, false,
-     `Learn about where you can find course descriptions,
-     what information they include, how they work, and details
-     about various components of a course description. Course
-      descriptions report information about a university or
-      college's classes. They're published both in course
-      catalogs that outline degree requirements and in cours
-      schedules that contain descriptions for all courses offered
-      during a particular semester.`),
-    ];
-
-  constructor() { }
-
-  getAllCourses(): ICourse[] {
-    return this.coursesList;
+  constructor(
+    private http: HttpClient,
+  ) {
   }
 
-  getCourseById(id: string): ICourse {
-    return this.coursesList.find((courseItem: ICourse) => courseItem.id === id);
+  private BASE_URL = 'http://localhost:3004';
+
+  public getCourses(count = 4, term = ''): Observable<ICourse[]> {
+    const url = `${this.BASE_URL}/courses`;
+    return this.http.get<ICourse[]>(url, {
+      params: {
+        textFragment: term.toUpperCase(),
+        start: `0`,
+        count: `${count}`,
+      }
+    });
   }
 
-  addCourse(course: ICourse): ICourse[] {
-    return this.coursesList = this.coursesList.concat(course);
+  public createCourse(newCourse: ICourse): Observable<ICourse[]> {
+    const url = `${this.BASE_URL}/courses`;
+    return this.http.post<ICourse[]>(url, newCourse);
   }
 
-  deleteCourseById(id: string): ICourse[] {
-    return this.coursesList = this.coursesList.filter((courseItem: ICourse) => courseItem.id !== id);
+  public getCourseById(courseId: number): Observable<ICourse> {
+    const url = `${this.BASE_URL}/courses/${courseId}`;
+    return this.http.get<ICourse>(url);
   }
 
-  updateCourseById(id: string, updateDataCourse: ICourse): ICourse[] {
+  public patchCourseById(courseId: number, newCourseData: ICourse): Observable<ICourse> {
+    const url = `${this.BASE_URL}/courses/${courseId}`;
+    return this.http.patch<ICourse>(url, newCourseData);
+  }
 
-    return this.coursesList.map( (item: ICourse) => {
-      if (item.id === id) {
-        return {...item, ...updateDataCourse};
-      } else {
-        return item;
+  public deleteCourseById(courseId: number): Observable<void> {
+    const url = `${this.BASE_URL}/courses/${courseId}`;
+    return this.http.delete<void>(url);
+  }
+
+  public getErrorTestCourses(): Observable<void> {
+    const url = `${this.BASE_URL}/error`;
+    return this.http.get<void>(url);
+  }
+
+  public searchCourses(term: string): Observable<ICourse[]> {
+    const url = `${this.BASE_URL}/courses`;
+
+    return this.http.get<ICourse[]>(`${url}`, {
+      params: {
+        textFragment: term.toUpperCase(),
       }
     });
   }
 
 }
+
+

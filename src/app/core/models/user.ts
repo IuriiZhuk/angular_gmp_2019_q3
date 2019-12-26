@@ -1,8 +1,9 @@
 export interface IUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  isAuth: boolean;
+  id: number;
+  token: string;
+  name: NameModel;
+  login: string;
+  password: string;
 }
 
 export interface AuthUser extends IUser {
@@ -10,16 +11,27 @@ export interface AuthUser extends IUser {
   password: string;
 }
 
-export interface UserCredential {
-  email: string;
-  password: string;
-}
 
 export class User implements IUser {
   constructor(
-    public id: string,
-    public firstName: string,
-    public lastName: string,
-    public isAuth: boolean,
+    public id: number,
+    public token: string,
+    public name: NameModel,
+    public login: string,
+    public password: string,
     ) { }
+}
+
+export interface LoginRequestModel {
+  login: string;
+  password: string;
+}
+
+export interface TokenRequestModel {
+  token: string;
+}
+
+export interface NameModel {
+  first: string;
+  last: string;
 }

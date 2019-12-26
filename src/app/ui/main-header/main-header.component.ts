@@ -1,37 +1,33 @@
-import { Component, OnInit, ChangeDetectorRef, OnChanges, AfterViewInit, DoCheck} from '@angular/core';
-import { AuthorizationService } from 'src/app/core/auth/service/authorization.service';
-import { AuthUser } from 'src/app/core/models/user';
-import { Router } from '@angular/router';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AuthorizationService} from 'src/app/core/auth/service/authorization.service';
+import {IUser, TokenRequestModel} from 'src/app/core/models/user';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.scss']
+  styleUrls: ['./main-header.component.scss'],
 })
-export class MainHeaderComponent implements OnInit, DoCheck{
+export class MainHeaderComponent implements OnInit {
 
-  public authUser: AuthUser;
-  public isAuth: boolean;
+  public user$: Observable<IUser>;
+  public userToken: TokenRequestModel;
+
   constructor(
-    private auth: AuthorizationService,
+    private authService: AuthorizationService,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   public ngOnInit() {
-    this.authUser = this.auth.getUserInfo();
-    this.isAuth = this.authUser && this.authUser.isAuth || false;
-  }
-  public ngDoCheck() {
-    this.authUser = this.auth.getUserInfo();
-    this.isAuth = this.authUser && this.authUser.isAuth || false;
+    this.userToken = {token: this.authService.getUserTokenFromLocalStorage()};
+    this.user$ = this.authService.getUserInfo(this.userToken);
   }
 
   public onLoginHandler() {
-    const user = this.auth.getUserInfo();
-    if (user) {
-      this.auth.logOut();
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate(['/login']);
   }
+
+
 }

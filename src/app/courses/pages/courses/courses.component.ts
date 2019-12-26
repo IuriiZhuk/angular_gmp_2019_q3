@@ -1,7 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { ICourse } from '../../models/course';
-import { FilterPipe } from 'src/app/ui/pipes/filter.pipe';
-import { CoursesService } from '../../services/courses.service';
+import {Component, OnInit} from '@angular/core';
+import {CoursesConstant, ICourse} from '../../models/course';
+import {FilterPipe} from 'src/app/ui/pipes/filter.pipe';
+import {CoursesService} from '../../services/courses.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -9,29 +10,33 @@ import { CoursesService } from '../../services/courses.service';
   styleUrls: ['./courses.component.scss']
 })
 export class CoursesComponent implements OnInit {
-  public searchValue: string;
-  public filteredMockCourses: ICourse[];
-  public courses: ICourse[] ;
+  public courses$: Observable<ICourse[]>;
+  public lastCourseCount = 4;
+  number;
 
   constructor(private filterPipe: FilterPipe,
               private courseService: CoursesService,
-              ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.courses = this.courseService.getAllCourses();
-    this.filteredMockCourses = this.courses;
+    this.courses$ = this.courseService.getCourses(this.lastCourseCount);
   }
 
-  public onSearchHandler(value: string) {
-    this.courses = this.courseService.getAllCourses();
-    this.filteredMockCourses = [...this.filterPipe.transform(this.courses, value)];
+  public onDeleteHandler(id: number) {
+    this.courseService.deleteCourseById(id).subscribe(
+      () => this.courses$ = this.courseService.getCourses(),
+      (error) => console.log(error)
+    );
   }
 
-  public onDeleteHandler(id: string) {
-    this.courseService.deleteCourseById(id);
-    this.filteredMockCourses = this.courseService.getAllCourses();
+  public onSearchHandler(term: string): void {
+    this.courses$ = this.courseService.getCourses(this.lastCourseCount, term);
   }
 
-
+  public onLoadMoreHandler() {
+    this.lastCourseCount += CoursesConstant.LOAD_MORE_COUNT;
+    this.courses$ = this.courseService.getCourses(this.lastCourseCount);
+  }
 
 }
