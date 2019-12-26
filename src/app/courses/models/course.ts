@@ -27,3 +27,8 @@ export interface IAuthor {
   id: number;
   name: string;
 }
+
+
+export enum CoursesConstant {
+  LOAD_MORE_COUNT = 3,
+}

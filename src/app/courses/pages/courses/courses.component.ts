@@ -1,11 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { ICourse } from '../../models/course';
-import { FilterPipe } from 'src/app/ui/pipes/filter.pipe';
-import { CoursesService } from '../../services/courses.service';
-import {Observable, Subject} from 'rxjs';
-import {
-  debounceTime, distinctUntilChanged, switchMap, filter, startWith, switchMapTo
-} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {CoursesConstant, ICourse} from '../../models/course';
+import {FilterPipe} from 'src/app/ui/pipes/filter.pipe';
+import {CoursesService} from '../../services/courses.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -14,26 +11,16 @@ import {
 })
 export class CoursesComponent implements OnInit {
   public courses$: Observable<ICourse[]>;
-  public lastCourseCount = 4; number;
-  // private searchTerms = new Subject<string>();
+  public lastCourseCount = 4;
+  number;
 
   constructor(private filterPipe: FilterPipe,
               private courseService: CoursesService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
-    this.courses$ = this.courseService.getCourses(this.lastCourseCount)
-    //   .pipe(
-    //   switchMap(
-    //     () => this.searchTerms.pipe(
-    //       startWith(''),
-    //       debounceTime(300),
-    //       distinctUntilChanged(),
-    //       switchMap((text: string) => this.courseService.searchCourses(text))
-    //     )
-    //   )
-    // )
-      ;
+    this.courses$ = this.courseService.getCourses(this.lastCourseCount);
   }
 
   public onDeleteHandler(id: number) {
@@ -44,12 +31,11 @@ export class CoursesComponent implements OnInit {
   }
 
   public onSearchHandler(term: string): void {
-     // this.searchTerms.next(term);
     this.courses$ = this.courseService.getCourses(this.lastCourseCount, term);
   }
 
   public onLoadMoreHandler() {
-    this.lastCourseCount += 3;
+    this.lastCourseCount += CoursesConstant.LOAD_MORE_COUNT;
     this.courses$ = this.courseService.getCourses(this.lastCourseCount);
   }
 
