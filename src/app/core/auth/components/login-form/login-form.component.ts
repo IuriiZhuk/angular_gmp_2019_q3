@@ -34,6 +34,7 @@ export class LoginFormComponent {
       (error: HttpErrorResponse) => {
         this.passwordValue = '';
         this.loginValue = '';
+        console.log(error);
         return alert(`${error.message}, :((( ,${error.statusText}`);
       }
     )

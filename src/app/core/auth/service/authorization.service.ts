@@ -17,6 +17,7 @@ export class AuthorizationService {
 
   public logIn(userCred: LoginRequestModel): Observable<TokenRequestModel> {
     const url = `${this.BASE_URL}/auth/login`;
+    debugger
     return this.http.post<TokenRequestModel>(url, userCred);
   }
 

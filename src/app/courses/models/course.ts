@@ -30,5 +30,6 @@ export interface IAuthor {
 
 
 export enum CoursesConstant {
+  LOAD_MORE_START = 4,
   LOAD_MORE_COUNT = 3,
 }
