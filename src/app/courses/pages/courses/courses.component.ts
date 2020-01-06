@@ -11,7 +11,7 @@ import {Observable} from 'rxjs';
 })
 export class CoursesComponent implements OnInit {
   public courses$: Observable<ICourse[]>;
-  public lastCourseCount = 4;
+  public lastCourseCount = CoursesConstant.LAST_COURSE_COUNT;
   number;
 
   constructor(private filterPipe: FilterPipe,
