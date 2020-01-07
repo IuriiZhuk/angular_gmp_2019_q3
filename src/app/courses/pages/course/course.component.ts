@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { CoursesState } from '../../+store/reducers/courses.reducers';
 import * as CoursesActions from '../../+store/actions/courses.actions';
+import * as fromRouterActions from '../../../actions/router.actions';
 
 @Component({
   selector: 'app-course',
@@ -51,7 +52,9 @@ export class CourseComponent implements OnInit {
   }
 
   public onCancelHandler() {
-    this.router.navigate(['/courses']);
+    this.store.dispatch(fromRouterActions.GO({
+      path: ['/courses'],
+    }));
   }
 
   public onSaveHandler() {
@@ -60,7 +63,6 @@ export class CourseComponent implements OnInit {
     } else {
       this.store.dispatch(CoursesActions.CREATE_COURSE({ course: this.course }));
     }
-    this.router.navigate(['/courses']);
   }
 
 }

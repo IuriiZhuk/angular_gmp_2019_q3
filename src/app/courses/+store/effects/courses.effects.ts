@@ -6,6 +6,8 @@ import * as CoursesActions from '../actions/courses.actions';
 import { switchMap, mergeMap, catchError, map } from 'rxjs/operators';
 import { ICourse } from '../../models/course';
 
+import * as fromRouterActions from '../../../actions/router.actions';
+
 
 @Injectable()
 
@@ -80,6 +82,17 @@ export class CourseEffects {
           catchError(error => of(CoursesActions.CREATE_COURSE_FAIL({ error })))
         )
     )
+  )
+  );
+
+  handleCourseSuccess$ = createEffect(() => this.actions$.pipe(
+    ofType(
+      CoursesActions.UPDATE_COURSES_SUCCESS,
+      CoursesActions.CREATE_COURSE_SUCCESS
+    ),
+    map(() => fromRouterActions.GO({
+      path: ['/courses'],
+    }))
   )
   );
 
