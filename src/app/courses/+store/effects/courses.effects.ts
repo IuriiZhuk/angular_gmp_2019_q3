@@ -45,7 +45,19 @@ export class CourseEffects {
           map((courses: ICourse[]) => CoursesActions.SEARCH_COURSES_SUCCESS({ courses })),
           catchError( error => of(CoursesActions.SEARCH_COURSES_FAIL({error})))
     ))
-    ));
+        ));
+
+  deleteCourse$ = createEffect(() => this.actions$.pipe(
+    ofType(CoursesActions.DELETE_COURSE),
+    mergeMap(
+      ({ id }) => this.coursesService.deleteCourseById(id)
+        .pipe(
+          map(() => CoursesActions.DELETE_COURSE_SUCCESS({ id })),
+          catchError(error => of(CoursesActions.DELETE_COURSE_FAIL({ error })))
+        )
+    )
+  )
+  );
 
 
   constructor(

@@ -39,10 +39,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   public onDeleteHandler(id: number) {
-    this.courseService.deleteCourseById(id).subscribe(
-      () => this.courses$ = this.courseService.getCourses(),
-      (error) => console.log(error)
-    );
+    this.store.dispatch(CoursesActions.DELETE_COURSE({id}));
   }
 
   public onSearchHandler(term: string): void {

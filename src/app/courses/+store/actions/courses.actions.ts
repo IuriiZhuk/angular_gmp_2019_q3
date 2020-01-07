@@ -63,7 +63,7 @@ export const CREATE_COURSE_SUCCESS = createAction(
 
 export const DELETE_COURSE = createAction(
   '[COURSES] Delete Course',
-  props<{ deleteCourse: ICourse }>()
+  props<{ id: number }>()
 );
 
 export const DELETE_COURSE_FAIL = createAction(
@@ -73,7 +73,7 @@ export const DELETE_COURSE_FAIL = createAction(
 
 export const DELETE_COURSE_SUCCESS = createAction(
   '[COURSES] Delete Course Success',
-  props<{ deleteCourse: ICourse }>()
+  props<{ id: number }>()
 );
 
 export const UPDATE_COURSES = createAction(
