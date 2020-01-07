@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../../services/courses.service';
 import { ICourse, IAuthor } from '../../models/course';
 import { Location } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { CoursesState } from '../../+store/reducers/courses.reducers';
+import * as CoursesActions from '../../+store/actions/courses.actions';
 
 @Component({
   selector: 'app-course',
@@ -19,6 +22,7 @@ export class CourseComponent implements OnInit {
     private route: ActivatedRoute,
     private courseService: CoursesService,
     private location: Location,
+    private store: Store<CoursesState>,
   ) { }
 
   ngOnInit() {
@@ -41,19 +45,21 @@ export class CourseComponent implements OnInit {
       this.id = id;
       this.courseService.getCourseById(id)
         .subscribe((course: ICourse) => {
-          console.log(course);
           return this.course = course;
         });
     }
   }
 
   public onCancelHandler() {
-    this.location.back();
     this.router.navigate(['/courses']);
   }
 
   public onSaveHandler() {
-    this.courseService.patchCourseById(this.id, this.course);
+    if (this.course.id) {
+      this.store.dispatch(CoursesActions.UPDATE_COURSES({ id: this.id, course: this.course }));
+    } else {
+      this.store.dispatch(CoursesActions.CREATE_COURSE({ course: this.course }));
+    }
     this.router.navigate(['/courses']);
   }
 

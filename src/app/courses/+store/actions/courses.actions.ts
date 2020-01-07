@@ -78,7 +78,7 @@ export const DELETE_COURSE_SUCCESS = createAction(
 
 export const UPDATE_COURSES = createAction(
   '[COURSES] Update Course',
-  props<{ course: ICourse }>()
+  props<{ id: number, course: ICourse }>()
 );
 
 export const UPDATE_COURSES_FAIL = createAction(

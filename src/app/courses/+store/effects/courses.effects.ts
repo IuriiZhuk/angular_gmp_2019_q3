@@ -59,6 +59,30 @@ export class CourseEffects {
   )
   );
 
+  updateCourse$ = createEffect(() => this.actions$.pipe(
+    ofType(CoursesActions.UPDATE_COURSES),
+    mergeMap(
+      ({ id, course }) => this.coursesService.patchCourseById(id, course)
+        .pipe(
+          map(( updatedCourse: ICourse) => CoursesActions.UPDATE_COURSES_SUCCESS({ course: updatedCourse })),
+          catchError(error => of(CoursesActions.DELETE_COURSE_FAIL({ error })))
+        )
+    )
+  )
+  );
+
+  createCourse$ = createEffect(() => this.actions$.pipe(
+    ofType(CoursesActions.CREATE_COURSE),
+    mergeMap(
+      ({ course }) => this.coursesService.createCourse(course)
+        .pipe(
+          map(( newCourse: ICourse) => CoursesActions.CREATE_COURSE_SUCCESS({ course: newCourse})),
+          catchError(error => of(CoursesActions.CREATE_COURSE_FAIL({ error })))
+        )
+    )
+  )
+  );
+
 
   constructor(
     private actions$: Actions,

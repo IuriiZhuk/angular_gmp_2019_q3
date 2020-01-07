@@ -27,9 +27,9 @@ export class CoursesService {
     });
   }
 
-  public createCourse(newCourse: ICourse): Observable<ICourse[]> {
+  public createCourse(newCourse: ICourse): Observable<ICourse> {
     const url = `${this.BASE_URL}/courses`;
-    return this.http.post<ICourse[]>(url, newCourse)
+    return this.http.post<ICourse>(url, newCourse)
     .pipe(catchError((error: any) => throwError(error.json())));
   }
 
