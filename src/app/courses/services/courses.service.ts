@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ICourse} from '../models/course';
+import {ICourse, CoursesConstant} from '../models/course';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class CoursesService {
 
   private BASE_URL = 'http://localhost:3004';
 
-  public getCourses(count = 4, term = ''): Observable<ICourse[]> {
+  public getCourses(count = CoursesConstant.LAST_COURSE_COUNT, term = ''): Observable<ICourse[]> {
     const url = `${this.BASE_URL}/courses`;
     return this.http.get<ICourse[]>(url, {
       params: {

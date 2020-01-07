@@ -19,10 +19,36 @@ export const initialState: CoursesState = {
 
 const coursesReducer = createReducer(
   initialState,
-  on(CoursesActions.LOAD_COURSES, (state: CoursesState) => ({ ...state, loading: true })),
-  on(CoursesActions.LOAD_COURSES_FAIL, (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
-  on(CoursesActions.LOAD_COURSES_SUCCESS,
+  on(
+    CoursesActions.LOAD_COURSES,
+    (state: CoursesState) => ({ ...state, loading: true })),
+  on(
+    CoursesActions.LOAD_COURSES_FAIL,
+    (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
+  on(
+    CoursesActions.LOAD_COURSES_SUCCESS,
     (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMaperHelper(courses, state) })),
+
+    on(
+      CoursesActions.LOAD_MORE_COURSES,
+      (state: CoursesState) => ({ ...state, loading: true, loaded: false })),
+    on(
+      CoursesActions.LOAD_MORE_COURSES_FAIL,
+      (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
+    on(
+      CoursesActions.LOAD_MORE_COURSES_SUCCESS,
+      (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMaperHelper(courses, state) })),
+
+      on(
+        CoursesActions.SEARCH_COURSES,
+        (state: CoursesState) => ({ ...state, loading: true, loaded: false })),
+      on(
+        CoursesActions.SEARCH_COURSES_FAIL,
+        (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
+      on(
+        CoursesActions.SEARCH_COURSES_SUCCESS,
+        (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseSearchHelper(courses, state) })),
+
   on(CoursesActions.UPDATE_COURSES_SUCCESS, CoursesActions.CREATE_COURSE_SUCCESS, (state: CoursesState, {course}) => ({
     ...state,
     entities: {
@@ -68,6 +94,13 @@ const courseMaperHelper = (courses: ICourse[], state: CoursesState) => {
     ...entities,
     [course.id]: course,
   }), { ...state.entities });
+};
+
+const courseSearchHelper = (courses: ICourse[], state: CoursesState) => {
+  return courses.reduce((entities: { [id: number]: ICourse }, course: ICourse) => ({
+    ...entities,
+    [course.id]: course,
+  }), { });
 };
 
 
