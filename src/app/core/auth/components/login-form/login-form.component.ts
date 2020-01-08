@@ -3,6 +3,9 @@ import {AuthorizationService} from '../../service/authorization.service';
 import {LoginRequestModel, TokenRequestModel} from '../../../models/user';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as fromAuthReducer from '../../+state/reducers/auth.reducer';
+import * as fromAuthActions from '../../+state/actions/auth.actions';
 
 @Component({
   selector: 'app-login-form',
@@ -17,6 +20,7 @@ export class LoginFormComponent {
   constructor(
     private authService: AuthorizationService,
     private router: Router,
+    private store: Store<fromAuthReducer.AuthentificationState>
   ) {
   }
 
@@ -25,19 +29,7 @@ export class LoginFormComponent {
       login: this.loginValue,
       password: this.passwordValue,
     };
-
-    this.authService.logIn(this.userCredentials).subscribe(
-      (token: TokenRequestModel) => {
-        this.authService.setTokenToLocalStorage(token);
-        this.router.navigate(['']);
-      },
-      (error: HttpErrorResponse) => {
-        this.passwordValue = '';
-        this.loginValue = '';
-        return alert(`${error.message}, :((( ,${error.statusText}`);
-      }
-    )
-    ;
+    this.store.dispatch(fromAuthActions.LOG_IN({ user: this.userCredentials }));
   }
 
 }

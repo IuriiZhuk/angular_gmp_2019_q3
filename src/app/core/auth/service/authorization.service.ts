@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IUser, LoginRequestModel, TokenRequestModel} from '../../models/user';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthorizationService {
 
   public logIn(userCred: LoginRequestModel): Observable<TokenRequestModel> {
     const url = `${this.BASE_URL}/auth/login`;
-    return this.http.post<TokenRequestModel>(url, userCred);
+    return this.http.post<TokenRequestModel>(url, userCred)
+    .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   public getUserInfo(token: TokenRequestModel): Observable<IUser> {
@@ -25,8 +27,8 @@ export class AuthorizationService {
     return this.http.post<IUser>(url, token);
   }
 
-  public setTokenToLocalStorage(authToken: TokenRequestModel): void {
-    localStorage.setItem('user', authToken.token);
+  public setTokenToLocalStorage(authToken: string): void {
+    localStorage.setItem('user', authToken);
   }
 
   public removeTokenFromLocalStorage(): void {
