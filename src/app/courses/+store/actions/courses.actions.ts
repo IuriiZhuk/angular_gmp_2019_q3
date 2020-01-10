@@ -90,5 +90,3 @@ export const UPDATE_COURSES_SUCCESS = createAction(
   '[COURSES] Update Course Success',
   props<{ course: ICourse }>()
 );
-
-

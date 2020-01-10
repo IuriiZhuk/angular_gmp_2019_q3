@@ -18,16 +18,9 @@ export const LOG_IN_FAILED = createAction(
 
 export const LOG_OUT = createAction(
   '[Login Page] Logout',
-  props<{ user: LoginRequestModel }>()
 );
-
 export const LOG_OUT_SUCCESS = createAction(
   '[Login Page] Logout success',
-);
-
-export const LOG_OUT_FAILED = createAction(
-  '[Login Page] Logout fail',
-  props<{ error: any }>()
 );
 
 export const GET_USER_INFO = createAction(
@@ -45,5 +38,13 @@ export const GET_USER_INFO_FAILED = createAction(
   props<{ error: any }>()
 );
 
+export const GET_USER_TOKEN_FROM_LOCAL_STORAGE = createAction(
+  '[MAIN_PAGE] Get user token from local storage',
+);
+
+export const GET_USER_TOKEN_FROM_LOCAL_STORAGE_SUCCESS = createAction(
+  '[MAIN_PAGE] Get user token from local storage success',
+  props<{ token: TokenRequestModel }>()
+);
 
 

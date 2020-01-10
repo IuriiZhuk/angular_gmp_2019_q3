@@ -6,6 +6,7 @@ import {NotFoundComponent} from './ui/not-found/not-found.component';
 import {MainPageComponent} from './courses/pages/main-page/main-page.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'courses', pathMatch: 'full', canActivate: [AuthGuard]},
   {
     path: '', component: MainPageComponent, canActivate: [AuthGuard], children: [
       {
