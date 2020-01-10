@@ -1,6 +1,7 @@
 import { Action, createReducer, on, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import * as CoursesActions from '../actions/courses.actions';
+import * as fromRoot from '../../../reducers';
 import { ICourse } from '../../models/course';
 
 export const coursesFeatureKey = 'courses';
@@ -27,7 +28,7 @@ const coursesReducer = createReducer(
     (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
   on(
     CoursesActions.LOAD_COURSES_SUCCESS,
-    (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMaperHelper(courses, state) })),
+    (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMapperHelper(courses, state) })),
 
   on(
     CoursesActions.LOAD_MORE_COURSES,
@@ -37,7 +38,7 @@ const coursesReducer = createReducer(
     (state: CoursesState) => ({ ...state, loading: false, loaded: false })),
   on(
     CoursesActions.LOAD_MORE_COURSES_SUCCESS,
-    (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMaperHelper(courses, state) })),
+    (state: CoursesState, { courses }) => ({ ...state, loading: false, loaded: true, entities: courseMapperHelper(courses, state) })),
 
   on(
     CoursesActions.SEARCH_COURSES,
@@ -102,8 +103,18 @@ export const getCoursesEntities = createSelector(
   (state: CoursesState): ICourse[] => Object.keys(state.entities).map((id: string) => state.entities[parseInt(id, 10)])
 );
 
+export const getCoursesEntitiesObject = createSelector(
+  getCoursesState,
+  (state: CoursesState) => state.entities
+);
+export const getSelectedCourse = createSelector(
+  getCoursesEntitiesObject,
+  fromRoot.selectRouter,
+  (entities, router) => entities[router.state.params.id]
+);
 
-const courseMaperHelper = (courses: ICourse[], state: CoursesState) => {
+
+const courseMapperHelper = (courses: ICourse[], state: CoursesState) => {
   return courses.reduce((entities: { [id: number]: ICourse }, course: ICourse) => ({
     ...entities,
     [course.id]: course,

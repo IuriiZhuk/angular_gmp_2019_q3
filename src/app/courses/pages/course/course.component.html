@@ -2,31 +2,32 @@
   <form class="course__form">
     <!-- Form Input block start -->
     <div class="course__label-block course__title">
-      <label for="title" class="course__title">Title: </label>
+      <label class="course__title">Title: </label>
       <span class="course__required">*required</span>
     </div>
     <input type="text" name="title" class="course__input course__input--title" [(ngModel)]="course.name">
     <!-- Form Input block end -->
 
-     <!-- Form Input block start -->
+    <!-- Form Input block start -->
     <div class="course__label-block course__description">
-      <label for="title" class="course__description">Description: </label>
+      <label class="course__description">Description: </label>
       <span class="course__required">*required</span>
     </div>
-    <textarea type="text" name="description" rows="7" class="course__input course__input--description" [(ngModel)]="course.description"></textarea>
+    <textarea type="text" name="description" rows="7" class="course__input course__input--description"
+              [(ngModel)]="course.description"></textarea>
     <!-- Form Input block end -->
 
-     <!-- Form Input block start -->
+    <!-- Form Input block start -->
     <div class="course__label-block course__duration">
-      <label for="title" class="course__duration">Duration: </label>
+      <label class="course__duration">Duration: </label>
       <span class="course__required">*required</span>
     </div>
     <input type="number" name="duration" class="course__input course__input--duration" [(ngModel)]="course.length">
     <!-- Form Input block end -->
 
-     <!-- Form Input block start -->
+    <!-- Form Input block start -->
     <div class="course__label-block course__date">
-      <label for="date" class="course__date">Date:</label>
+      <label class="course__date">Date:</label>
       <span class="course__required">*required</span>
     </div>
     <input type="date" name="date" class="course__input course__input--date" [(ngModel)]="course.date">
@@ -34,15 +35,16 @@
 
     <!-- Form Input block start -->
     <div class="course__label-block course__authors">
-      <label for="authors" class="course__date">Authors:</label>
+      <label class="course__date">Authors:</label>
       <span class="course__required">*required</span>
     </div>
     <input type="authors" name="authors" class="course__input course__input--authors">
     <!-- Form Input block end -->
 
     <div class="course__buttons">
-      <button type="reset" class="button course__button course__button--cancel" (click)="onCancelHandler()">Cancel</button>
-      <button type="submit" class="button course__button course__button--save"  (click)="onSaveHandler()">Save</button>
+      <button type="reset" class="button course__button course__button--cancel" (click)="onCancelHandler()">Cancel
+      </button>
+      <button type="submit" class="button course__button course__button--save" (click)="onSaveHandler()">Save</button>
     </div>
   </form>
 </div>
