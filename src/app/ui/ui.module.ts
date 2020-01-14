@@ -16,6 +16,7 @@ import { OrderByDatePipe } from './pipes/order-by-date.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { AuthModule } from '../core/auth/auth.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoadingComponent } from './loading/loading.component';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -24,6 +25,7 @@ const COMPONENTS = [
   SearchBarComponent,
   LogoComponent,
   NotFoundComponent,
+  LoadingComponent,
 ];
 
 const PIPES = [

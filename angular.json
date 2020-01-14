@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angularMGP"
+    }
+  },
+  "defaultProject": "angularMGP",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

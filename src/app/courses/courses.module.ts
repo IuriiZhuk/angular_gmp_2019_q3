@@ -8,6 +8,10 @@ import { UiModule } from '../ui/ui.module';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromCourses from '../courses/+store/reducers/courses.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './+store/effects/courses.effects';
 
 
 
@@ -24,6 +28,8 @@ import { FormsModule } from '@angular/forms';
     UiModule,
     CoursesRoutingModule,
     FormsModule,
+    EffectsModule.forFeature([CourseEffects]),
+    StoreModule.forFeature(fromCourses.coursesFeatureKey, fromCourses.reducer),
   ],
   exports: [
     MainPageComponent,
