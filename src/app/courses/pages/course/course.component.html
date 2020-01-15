@@ -9,9 +9,10 @@
       formControlName="name"
       type="text" name="title"
       class="course__input course__input--title"
-      [ngClass]="{'course__error': courseForm.get('name').errors }"
+      [ngClass]="{'course__error': courseForm.get('name').dirty && courseForm.get('name').errors }"
     >
-    <div class="course__error-text" *ngIf="courseForm.get('name').hasError('maxlength')">
+    <div class="course__error-text"
+         *ngIf="courseForm.get('name').dirty && courseForm.get('name').hasError('maxlength')">
       Course title should be no longer than 30 symbols
     </div>
     <!-- Form Input block end -->
@@ -26,7 +27,7 @@
       type="text" name="description"
       rows="7"
       class="course__input course__input--description"
-      [ngClass]="{'course__error': courseForm.get('description').errors }"
+      [ngClass]="{'course__error': courseForm.get('description').dirty && courseForm.get('description').errors }"
     >
 
     </textarea>
@@ -81,5 +82,5 @@
   Form Status: {{ courseForm.status }}
 </p>
 
-<p>Error {{courseForm.get('duration').hasError('pattern')}}</p>
+<p>Error {{courseForm.get('name').dirty}}</p>
 

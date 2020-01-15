@@ -65,7 +65,6 @@ export class CourseComponent implements OnInit, OnDestroy {
 
   public onSaveHandler() {
     this.course = {...this.course , ...this.courseForm.value};
-    debugger
     if (this.course.id) {
       this.store.dispatch(CoursesActions.UPDATE_COURSES({id: this.course.id, course: this.course}));
     } else {
