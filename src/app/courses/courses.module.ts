@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromCourses from '../courses/+store/reducers/courses.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './+store/effects/courses.effects';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -28,6 +29,7 @@ import { CourseEffects } from './+store/effects/courses.effects';
     UiModule,
     CoursesRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     EffectsModule.forFeature([CourseEffects]),
     StoreModule.forFeature(fromCourses.coursesFeatureKey, fromCourses.reducer),
   ],
