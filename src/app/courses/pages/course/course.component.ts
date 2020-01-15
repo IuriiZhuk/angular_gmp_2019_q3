@@ -35,7 +35,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   public courseForm = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(30)]],
     description: ['', [Validators.required, Validators.maxLength(500)]],
-    duration: ['', [Validators.required, Validators.pattern('/d')]],
+    duration: ['', [Validators.required, Validators.pattern(/\d+$/)]],
     date: ['', Validators.required],
     // authors: [''],
 
