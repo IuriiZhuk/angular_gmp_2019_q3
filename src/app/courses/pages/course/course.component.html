@@ -6,12 +6,12 @@
       <span class="course__required">*required</span>
     </div>
     <input
-      formControlName="title"
+      formControlName="name"
       type="text" name="title"
       class="course__input course__input--title"
-      [ngClass]="{'course__error': courseForm.get('title').errors }"
+      [ngClass]="{'course__error': courseForm.get('name').errors }"
     >
-    <div class="course__error-text" *ngIf="courseForm.get('title').hasError('maxlength')">
+    <div class="course__error-text" *ngIf="courseForm.get('name').hasError('maxlength')">
       Course title should be no longer than 30 symbols
     </div>
     <!-- Form Input block end -->

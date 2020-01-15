@@ -33,7 +33,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   public courseForm = this.fb.group({
-    title: ['', [Validators.required, Validators.maxLength(30)]],
+    name: ['', [Validators.required, Validators.maxLength(30)]],
     description: ['', [Validators.required, Validators.maxLength(500)]],
     duration: ['', [Validators.required, Validators.pattern(/\d+$/)]],
     date: ['', Validators.required],
@@ -46,6 +46,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     this.subscription.add(this.store.pipe(select(getSelectedCourse)).subscribe(
       (course: ICourse) => {
         if (course) {
+          this.course = course;
           this.setCourseValueToForm(course);
         }
       }
@@ -63,6 +64,8 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   public onSaveHandler() {
+    this.course = {...this.course , ...this.courseForm.value};
+    debugger
     if (this.course.id) {
       this.store.dispatch(CoursesActions.UPDATE_COURSES({id: this.course.id, course: this.course}));
     } else {
@@ -80,7 +83,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     const formattedDate = date.toISOString().substring(0, 10);
 
     this.courseForm.setValue({
-      title: course.name,
+      name: course.name,
       description: course.description,
       duration: course.length,
       date: formattedDate,
