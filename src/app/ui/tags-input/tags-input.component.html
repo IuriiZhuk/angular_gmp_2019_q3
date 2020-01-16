@@ -3,19 +3,21 @@
     <label for="tag-input">Authors:</label>
     <span>*required</span>
   </div>
-  <div class="authors__list">
+  <div class="authors__list" formArrayName="authors">
     <span
       class="authors__item"
-      *ngFor="let author of authorsList"
+      *ngFor="let author of authors.controls; let i = index"
+
     >
-      {{author.name}} {{author?.lastName}}
+      {{author.value.name}}
       <span
         class="authors__remove"
-        (click)="removeAuthor(author)"
+        (click)="removeAuthor(i)"
       >
         &times;
       </span>
     </span>
+  </div>
     <input
       class="authors__input"
       type="text"
@@ -24,7 +26,6 @@
       placeholder="add author"
       formControlName="tagInput"
     >
-  </div>
   <div
     *ngIf="availableAuthors.length"
     class="authors__available-list-wrapper"

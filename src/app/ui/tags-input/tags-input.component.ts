@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormArray, FormArrayName} from '@angular/forms';
 import {IAuthor} from '../../courses/models/course';
 import {Observable, Subscription} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
@@ -19,6 +19,7 @@ export class TagsInputComponent implements OnInit, OnDestroy {
   public map = new Map();
   public tagsForm = this.fb.group({
     tagInput: [''],
+    authors: this.fb.array([]),
   });
 
   public authorsList: IAuthor[] = [];
@@ -42,13 +43,18 @@ export class TagsInputComponent implements OnInit, OnDestroy {
     this.subscription.add(this.store.pipe(select(getAuthorsCourse)).subscribe(
       (authors: IAuthor[]) => {
         this.authorsList = authors;
+        if (authors && authors.length) {
+          authors.forEach(author => this.authors.push(this.fb.control({
+            name: `${author.name} ${author.lastName}`
+          })));
+        }
       }
     ));
 
     this.subscription.add(
       this.tagsForm.get('tagInput').valueChanges
           .pipe(
-            filter(value => value.length > 1),
+            filter(value => value && value.length > 1),
             debounceTime(700),
             distinctUntilChanged(),
           )
@@ -60,20 +66,29 @@ export class TagsInputComponent implements OnInit, OnDestroy {
     );
   }
 
-  public removeAuthor(deletedAuthor: IAuthor): IAuthor[] {
-    return this.authorsList = this.authorsList.filter((author: IAuthor) => author.id !== deletedAuthor.id);
+  public removeAuthor(i) {
+    this.authors.removeAt(i);
   }
 
   public addAuthorHandler(selectAuthor: IAuthor) {
-    const presence = this.authorsList.some( (author: IAuthor) => author.id === selectAuthor.id );
-    if (!presence) {
-      this.authorsList.push(selectAuthor);
-    }
+    const duplicate = this.tagsForm.get('authors').value;
+    console.log(duplicate);
+    this.authors.push(this.fb.control({
+      name: `${selectAuthor.name}`
+    }));
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
 
   }
+
+  get authors(): FormArray {
+    return this.tagsForm.get('authors') as FormArray;
+  }
+
+  // public addAuthor() {
+  //   this.authors.push(Fo);
+  // }
 
 }
