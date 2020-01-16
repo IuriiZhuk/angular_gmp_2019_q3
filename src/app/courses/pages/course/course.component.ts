@@ -21,6 +21,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   public course: ICourse;
   public id: number;
   public subscription = new Subscription();
+  public authors: IAuthor[];
 
   constructor(
     private router: Router,
@@ -42,12 +43,13 @@ export class CourseComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
-
+    this.authors = [];
     this.subscription.add(this.store.pipe(select(getSelectedCourse)).subscribe(
       (course: ICourse) => {
         if (course) {
           this.course = course;
           this.setCourseValueToForm(course);
+          this.authors = course.authors;
         }
       }
     ));

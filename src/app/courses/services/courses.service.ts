@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ICourse, CoursesConstant} from '../models/course';
+import {ICourse, CoursesConstant, IAuthor} from '../models/course';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -54,6 +54,15 @@ export class CoursesService {
   public getErrorTestCourses(): Observable<void> {
     const url = `${this.BASE_URL}/error`;
     return this.http.get<void>(url);
+  }
+
+  public getAuthors(term = ''): Observable<IAuthor[]> {
+    const url = `${this.BASE_URL}/authors`;
+    return this.http.get<IAuthor[]>(url, {
+      params: {
+        textFragment: term.toUpperCase(),
+      }
+    });
   }
 
 }

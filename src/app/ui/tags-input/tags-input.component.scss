@@ -1,0 +1,50 @@
+@import "../../../styles/colors";
+
+.authors {
+  width: 70%;
+
+  &__label-block {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  &__list {
+    border: 1px solid $pale-grey;
+    padding: 4px;
+  }
+
+  &__item {
+    display: inline-block;
+    border: 1px solid transparent;
+    padding: 8px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    border-radius: 16px;
+    background-color: $pale-grey;
+  }
+
+  &__remove {
+    cursor: pointer;
+  }
+
+  &__input {
+    border: none;
+  }
+
+  &__available-list-wrapper {
+    border: 1px solid $pale-grey;
+  }
+
+  &__available-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 4px;
+  }
+
+  &__available-list-item {
+    cursor: pointer;
+    margin-bottom: 8px;
+  }
+
+}

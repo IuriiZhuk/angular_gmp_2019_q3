@@ -1,0 +1,50 @@
+<form class="authors" [formGroup]="tagsForm">
+  <div class="authors__label-block">
+    <label for="tag-input">Authors:</label>
+    <span>*required</span>
+  </div>
+  <div class="authors__list">
+    <span
+      class="authors__item"
+      *ngFor="let author of authorsList"
+    >
+      {{author.name}} {{author?.lastName}}
+      <span
+        class="authors__remove"
+        (click)="removeAuthor(author)"
+      >
+        &times;
+      </span>
+    </span>
+    <input
+      class="authors__input"
+      type="text"
+      name="tag-input"
+      id="tag-input"
+      placeholder="add author"
+      formControlName="tagInput"
+    >
+  </div>
+  <div
+    *ngIf="availableAuthors.length"
+    class="authors__available-list-wrapper"
+  >
+    <ul class="authors__available-list">
+      <li
+        class="authors__available-list-item"
+        *ngFor="let availableAuthor of availableAuthors"
+        (click)="addAuthorHandler(availableAuthor)"
+      >
+        {{availableAuthor?.name}}
+      </li>
+    </ul>
+
+  </div>
+</form>
+
+
+
+<p>
+  Form tags Value: {{ tagsForm.value | json }}
+</p>
+

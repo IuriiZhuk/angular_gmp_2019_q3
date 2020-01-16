@@ -6,7 +6,7 @@ export interface ICourse {
   date: string;
   length: number;
   description: string;
-  authors: IAuthor;
+  authors: IAuthor[];
   isTopRated: boolean;
 }
 
@@ -18,7 +18,7 @@ export class Course implements ICourse {
       public date: string,
       public length: number,
       public description: string,
-      public authors: IAuthor,
+      public authors: IAuthor[],
       public isTopRated: boolean,
   ) {}
 }
@@ -26,6 +26,7 @@ export class Course implements ICourse {
 export interface IAuthor {
   id: number;
   name: string;
+  lastName?: string;
 }
 
 

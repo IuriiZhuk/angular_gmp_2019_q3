@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ICourse } from '../../models/course';
+import {IAuthor, ICourse} from '../../models/course';
 
 export const LOAD_COURSES = createAction(
   '[COURSES] Load Courses',
@@ -89,4 +89,19 @@ export const UPDATE_COURSES_FAIL = createAction(
 export const UPDATE_COURSES_SUCCESS = createAction(
   '[COURSES] Update Course Success',
   props<{ course: ICourse }>()
+);
+
+export const LOAD_AUTHORS = createAction(
+  '[COURSES] Load Authors',
+  props<{ term: string }>()
+);
+
+export const LOAD_AUTHORS_FAIL = createAction(
+  '[COURSES] Load Authors Fail',
+  props<{ error: any }>()
+);
+
+export const LOAD_AUTHORS_SUCCESS = createAction(
+  '[COURSES] Load Authors Success',
+  props<{ authors: IAuthor[] }>()
 );
