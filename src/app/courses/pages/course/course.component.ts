@@ -38,7 +38,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     description: ['', [Validators.required, Validators.maxLength(500)]],
     duration: ['', [Validators.required, Validators.pattern(/\d+$/)]],
     date: ['', Validators.required],
-    // authors: [''],
+    authors: [''],
 
   });
 
@@ -53,13 +53,13 @@ export class CourseComponent implements OnInit, OnDestroy {
         }
       }
     ));
-    // this.subscription.add(this.courseForm.valueChanges.subscribe((value) => {
-    //   console.log(this.courseForm);
-    //   debugger;
-    // }));
   }
 
   public onCancelHandler() {
+    this.courseForm.get('authors').setValue({
+      courseAuthors: [],
+      tagInput: '',
+    });
     this.store.dispatch(fromRouterActions.GO({
       path: ['/courses'],
     }));
@@ -88,7 +88,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       description: course.description,
       duration: course.length,
       date: formattedDate,
-      // authors: course.authors,
+      authors: {courseAuthors : course.authors, tagInput: ''},
     });
   }
 }

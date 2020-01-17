@@ -41,7 +41,17 @@
       <label class="course__duration">Duration: </label>
       <span class="course__required">*required</span>
     </div>
-    <input formControlName="duration" type="text" name="duration" class="course__input course__input--duration">
+    <input formControlName="duration"
+           type="text" name="duration"
+           class="course__input course__input--duration"
+           [ngClass]="{'course__error': courseForm.get('duration').dirty && courseForm.get('duration').errors }"
+    >
+    <div class="course__error-text" *ngIf="courseForm.get('duration').hasError('pattern')">
+      Course description should include only numbers
+    </div>
+    <div class="course__error-text" *ngIf="courseForm.get('duration').hasError('required') && courseForm.get('duration').dirty">
+     Please fill this field
+    </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
@@ -58,6 +68,7 @@
     </div>
 <!--    <input type="authors" name="authors" class="course__input course__input&#45;&#45;authors">-->
     <app-tags-input
+      formControlName="authors"
     ></app-tags-input>
     <!--    <input formControlName="authors" type="authors" name="authors" class="course__input course__input&#45;&#45;authors">-->
     <!-- Form Input block end -->
@@ -72,16 +83,3 @@
     </div>
   </form>
 </div>
-
-
-<p>
-  Form Value: {{ courseForm.value | json }}
-</p>
-
-
-<p>
-  Form Status: {{ courseForm.status }}
-</p>
-
-<p>Error {{courseForm.get('name').dirty}}</p>
-

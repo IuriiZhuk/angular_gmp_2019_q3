@@ -1,31 +1,34 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormArray, FormArrayName} from '@angular/forms';
+import {Component, EventEmitter, forwardRef, OnDestroy, OnInit, Output} from '@angular/core';
+import {ControlValueAccessor, FormArray, FormBuilder, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {IAuthor} from '../../courses/models/course';
-import {Observable, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, tap} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
-import {CoursesState, getAuthors, getAuthorsCourse, getAuthorsEntity} from '../../courses/+store/reducers/courses.reducers';
+import {CoursesState, getAuthors} from '../../courses/+store/reducers/courses.reducers';
 import * as CourseActions from '../../courses/+store/actions/courses.actions';
 
 @Component({
   selector: 'app-tags-input',
   templateUrl: './tags-input.component.html',
-  styleUrls: ['./tags-input.component.scss']
+  styleUrls: ['./tags-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TagsInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class TagsInputComponent implements OnInit, OnDestroy {
+export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public subscription = new Subscription();
-  public inputValue = '';
-  public map = new Map();
+  public showAvailableAuthors = false;
   public tagsForm = this.fb.group({
     tagInput: [''],
-    authors: this.fb.array([]),
+    authors: this.fb.array([], Validators.required),
   });
 
-  public authorsList: IAuthor[] = [];
   public availableAuthors: IAuthor[];
-
-  @Output() public authorName = new EventEmitter<string>(true);
 
   constructor(
     private fb: FormBuilder,
@@ -37,24 +40,17 @@ export class TagsInputComponent implements OnInit, OnDestroy {
     this.subscription.add(this.store.pipe(select(getAuthors)).subscribe(
       (authors: IAuthor[]) => {
         this.availableAuthors = authors;
-      }
-    ));
-
-    this.subscription.add(this.store.pipe(select(getAuthorsCourse)).subscribe(
-      (authors: IAuthor[]) => {
-        this.authorsList = authors;
-        if (authors && authors.length) {
-          authors.forEach(author => this.authors.push(this.fb.control({
-            name: `${author.name} ${author.lastName}`
-          })));
-        }
+        this.showAvailableAuthors = true;
       }
     ));
 
     this.subscription.add(
       this.tagsForm.get('tagInput').valueChanges
           .pipe(
-            filter(value => value && value.length > 1),
+            filter(value => {
+              this.showAvailableAuthors = !!value.length;
+              return value && value.length > 1;
+            }),
             debounceTime(700),
             distinctUntilChanged(),
           )
@@ -71,11 +67,18 @@ export class TagsInputComponent implements OnInit, OnDestroy {
   }
 
   public addAuthorHandler(selectAuthor: IAuthor) {
-    const duplicate = this.tagsForm.get('authors').value;
-    console.log(duplicate);
-    this.authors.push(this.fb.control({
-      name: `${selectAuthor.name}`
-    }));
+    const duplicate =
+      this.tagsForm.get('authors')
+          .value
+          .some((author: IAuthor) => author.id === selectAuthor.id);
+    if (!duplicate) {
+      this.authors.push(this.fb.control({
+        name: `${selectAuthor.name}`,
+        id: selectAuthor.id,
+      }));
+
+      this.onChange(this.tagsForm.get('authors').value);
+    }
   }
 
   public ngOnDestroy(): void {
@@ -87,8 +90,25 @@ export class TagsInputComponent implements OnInit, OnDestroy {
     return this.tagsForm.get('authors') as FormArray;
   }
 
-  // public addAuthor() {
-  //   this.authors.push(Fo);
-  // }
+  private onTouched = () => {
+  };
+
+  private onChange: (value) => void = () => {
+  };
+
+  public writeValue({courseAuthors, tagInput}): void {
+    if (courseAuthors && courseAuthors.length) {
+      courseAuthors.forEach( (author: IAuthor) => this.addAuthorHandler(author));
+    }
+    this.tagsForm.get('tagInput').setValue(tagInput);
+  }
+
+  registerOnChange(onChange: (value: string) => void) {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouched: () => void) {
+    this.onTouched = onTouched;
+  }
 
 }

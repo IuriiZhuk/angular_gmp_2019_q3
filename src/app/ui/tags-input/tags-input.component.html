@@ -20,14 +20,14 @@
   </div>
     <input
       class="authors__input"
-      type="text"
+      type="search"
       name="tag-input"
       id="tag-input"
-      placeholder="add author"
+      placeholder=" + add author"
       formControlName="tagInput"
     >
   <div
-    *ngIf="availableAuthors.length"
+    *ngIf="showAvailableAuthors"
     class="authors__available-list-wrapper"
   >
     <ul class="authors__available-list">
@@ -36,16 +36,10 @@
         *ngFor="let availableAuthor of availableAuthors"
         (click)="addAuthorHandler(availableAuthor)"
       >
-        {{availableAuthor?.name}}
+        {{availableAuthor.name}}
       </li>
     </ul>
 
   </div>
 </form>
-
-
-
-<p>
-  Form tags Value: {{ tagsForm.value | json }}
-</p>
 
