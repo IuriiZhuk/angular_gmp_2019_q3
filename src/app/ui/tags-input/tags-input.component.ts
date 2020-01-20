@@ -36,6 +36,13 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
   ) {
   }
 
+  get tagInput() {
+    return this.tagsForm.get('tagInput');
+  }
+ get authorsInput() {
+    return this.tagsForm.get('authors');
+  }
+
   ngOnInit() {
     this.subscription.add(this.store.pipe(select(getAuthors)).subscribe(
       (authors: IAuthor[]) => {
@@ -48,7 +55,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
       this.tagsForm.get('tagInput').valueChanges
           .pipe(
             filter(value => {
-              this.showAvailableAuthors = !!value.length;
+              this.showAvailableAuthors = value && !!value.length;
               return value && value.length > 1;
             }),
             debounceTime(700),
@@ -64,9 +71,11 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
 
   public removeAuthor(i) {
     this.authors.removeAt(i);
+    this.onChange(this.authorsInput.value);
   }
 
   public addAuthorHandler(selectAuthor: IAuthor) {
+
     const duplicate =
       this.tagsForm.get('authors')
           .value
@@ -77,7 +86,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
         id: selectAuthor.id,
       }));
 
-      this.onChange(this.tagsForm.get('authors').value);
+      this.onChange(this.authorsInput.value);
     }
   }
 
@@ -87,7 +96,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
   }
 
   get authors(): FormArray {
-    return this.tagsForm.get('authors') as FormArray;
+    return this.authorsInput as FormArray;
   }
 
   private onTouched = () => {
@@ -100,15 +109,19 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
     if (courseAuthors && courseAuthors.length) {
       courseAuthors.forEach( (author: IAuthor) => this.addAuthorHandler(author));
     }
-    this.tagsForm.get('tagInput').setValue(tagInput);
+    this.tagInput.setValue(tagInput);
   }
 
-  registerOnChange(onChange: (value: string) => void) {
+  public registerOnChange(onChange: (value: string) => void) {
     this.onChange = onChange;
   }
 
-  registerOnTouched(onTouched: () => void) {
+  public registerOnTouched(onTouched: () => void) {
     this.onTouched = onTouched;
+  }
+
+  public onClearSearchHandler() {
+    this.tagInput.setValue('');
   }
 
 }

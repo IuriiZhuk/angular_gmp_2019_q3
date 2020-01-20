@@ -31,6 +31,7 @@
 
   &__input {
     border: none;
+    width: 70%;
   }
 
   &__available-list-wrapper {
@@ -46,6 +47,14 @@
   &__available-list-item {
     cursor: pointer;
     margin-bottom: 8px;
+  }
+
+  &__error {
+    border: 2px solid red;
+  }
+  &__error-text {
+    color: red;
+    margin-bottom: 4px;
   }
 
 }

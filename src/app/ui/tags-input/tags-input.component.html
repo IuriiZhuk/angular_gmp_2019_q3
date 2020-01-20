@@ -3,7 +3,10 @@
     <label for="tag-input">Authors:</label>
     <span>*required</span>
   </div>
-  <div class="authors__list" formArrayName="authors">
+  <div class="authors__list"
+       formArrayName="authors"
+       [ngClass]="{'authors__error': tagsForm.dirty && authorsInput.errors }"
+  >
     <span
       class="authors__item"
       *ngFor="let author of authors.controls; let i = index"
@@ -17,7 +20,18 @@
         &times;
       </span>
     </span>
+    <span
+      *ngIf="!authors.controls.length"
+    >
+      To add author use filed below
+    </span>
+
   </div>
+
+  <div class="authors__error-text" *ngIf="authorsInput.errors?.required && tagsForm.dirty">
+    This field is required
+  </div>
+
     <input
       class="authors__input"
       type="search"
@@ -26,6 +40,12 @@
       placeholder=" + add author"
       formControlName="tagInput"
     >
+  <button
+    *ngIf="tagInput.value"
+  (click)="onClearSearchHandler()"
+  >
+    Clear search
+  </button>
   <div
     *ngIf="showAvailableAuthors"
     class="authors__available-list-wrapper"
@@ -42,4 +62,3 @@
 
   </div>
 </form>
-

@@ -2,75 +2,88 @@
   <form class="course__form" [formGroup]="courseForm" (ngSubmit)="onSaveHandler()">
     <!-- Form Input block start -->
     <div class="course__label-block course__title">
-      <label class="course__title">Title: </label>
+      <label class="course__title" for="name">Title: </label>
       <span class="course__required">*required</span>
     </div>
     <input
       formControlName="name"
+      id="name"
       type="text" name="title"
       class="course__input course__input--title"
-      [ngClass]="{'course__error': courseForm.get('name').dirty && courseForm.get('name').errors }"
+      [ngClass]="{'course__error': name.dirty && name.errors }"
     >
+    <div class="course__error-text" *ngIf="name.errors?.required && name.dirty">
+      This field is required
+    </div>
     <div class="course__error-text"
-         *ngIf="courseForm.get('name').dirty && courseForm.get('name').hasError('maxlength')">
+         *ngIf="name.dirty && name.errors?.maxlength">
       Course title should be no longer than 30 symbols
     </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
     <div class="course__label-block course__description">
-      <label class="course__description">Description: </label>
+      <label class="course__description" for="description">Description: </label>
       <span class="course__required">*required</span>
     </div>
     <textarea
+      id="description"
       formControlName="description"
       type="text" name="description"
       rows="7"
       class="course__input course__input--description"
-      [ngClass]="{'course__error': courseForm.get('description').dirty && courseForm.get('description').errors }"
+      [ngClass]="{'course__error': description.dirty && description.errors }"
     >
 
     </textarea>
-    <div class="course__error-text" *ngIf="courseForm.get('description').hasError('maxlength')">
+    <div class="course__error-text" *ngIf="description.errors?.required && description.dirty">
+      This field is required
+    </div>
+    <div class="course__error-text" *ngIf="description.dirty && description.errors?.maxlength">
       Course description should be no longer than 500 symbols
     </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
     <div class="course__label-block course__duration">
-      <label class="course__duration">Duration: </label>
+      <label class="course__duration" for="duration">Duration: </label>
       <span class="course__required">*required</span>
     </div>
     <input formControlName="duration"
+           id="duration"
            type="text" name="duration"
            class="course__input course__input--duration"
-           [ngClass]="{'course__error': courseForm.get('duration').dirty && courseForm.get('duration').errors }"
+           [ngClass]="{'course__error': duration.dirty && duration.errors }"
     >
-    <div class="course__error-text" *ngIf="courseForm.get('duration').hasError('pattern')">
+    <div class="course__error-text" *ngIf="duration.errors?.pattern">
       Course description should include only numbers
     </div>
-    <div class="course__error-text" *ngIf="courseForm.get('duration').hasError('required') && courseForm.get('duration').dirty">
-     Please fill this field
+    <div class="course__error-text" *ngIf="duration.errors?.required && duration.dirty">
+     This field is required
     </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
     <div class="course__label-block course__date">
-      <label class="course__date">Date:</label>
+      <label class="course__date" for="date">Date:</label>
       <span class="course__required">*required</span>
     </div>
-    <input formControlName="date" type="date" name="date" class="course__input course__input--date">
+    <input formControlName="date"
+           id="date"
+           type="date"
+           name="date"
+           class="course__input course__input--date"
+           [ngClass]="{'course__error': date.dirty && date.errors }"
+    >
+    <div class="course__error-text" *ngIf="date.errors?.required && date.dirty">
+      This field is required
+    </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
-    <div class="course__label-block course__authors">
-
-    </div>
-<!--    <input type="authors" name="authors" class="course__input course__input&#45;&#45;authors">-->
     <app-tags-input
       formControlName="authors"
     ></app-tags-input>
-    <!--    <input formControlName="authors" type="authors" name="authors" class="course__input course__input&#45;&#45;authors">-->
     <!-- Form Input block end -->
 
     <div class="course__buttons">

@@ -38,9 +38,22 @@ export class CourseComponent implements OnInit, OnDestroy {
     description: ['', [Validators.required, Validators.maxLength(500)]],
     duration: ['', [Validators.required, Validators.pattern(/\d+$/)]],
     date: ['', Validators.required],
-    authors: [''],
+    authors: ['', Validators.required],
 
   });
+
+  get name() {
+    return this.courseForm.get('name');
+  }
+  get description() {
+    return this.courseForm.get('description');
+  }
+  get duration() {
+    return this.courseForm.get('duration');
+  }
+  get date() {
+    return this.courseForm.get('date');
+  }
 
   ngOnInit() {
     this.authors = [];
@@ -66,7 +79,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   }
 
   public onSaveHandler() {
-    this.course = {...this.course , ...this.courseForm.value};
+    this.course = {...this.course, ...this.courseForm.value};
     if (this.course.id) {
       this.store.dispatch(CoursesActions.UPDATE_COURSES({id: this.course.id, course: this.course}));
     } else {
@@ -88,7 +101,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       description: course.description,
       duration: course.length,
       date: formattedDate,
-      authors: {courseAuthors : course.authors, tagInput: ''},
+      authors: {courseAuthors: course.authors, tagInput: ''},
     });
   }
 }
