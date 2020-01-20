@@ -5,7 +5,7 @@
   </div>
   <div class="authors__list"
        formArrayName="authors"
-       [ngClass]="{'authors__error': tagsForm.dirty && authorsInput.errors }"
+       [ngClass]="{'authors__error': !tagsForm.valid && authorsInput.errors }"
   >
     <span
       class="authors__item"
@@ -28,7 +28,7 @@
 
   </div>
 
-  <div class="authors__error-text" *ngIf="authorsInput.errors?.required && tagsForm.dirty">
+  <div class="authors__error-text" *ngIf="authorsInput.errors?.required && !tagsForm.valid">
     This field is required
   </div>
 
@@ -62,3 +62,13 @@
 
   </div>
 </form>
+
+tagSFrom dirty{{authorsInput.dirty}}
+<hr>
+tagSFrom pristine {{authorsInput.pristine}}
+<hr>
+tagSFrom touched{{authorsInput.touched}}
+<hr>
+tagSFrom untoch{{authorsInput.untouched}}
+<hr>
+

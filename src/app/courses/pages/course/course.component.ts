@@ -55,6 +55,10 @@ export class CourseComponent implements OnInit, OnDestroy {
     return this.courseForm.get('date');
   }
 
+  get authorsArray() {
+    return this.courseForm.get('authors');
+  }
+
   ngOnInit() {
     this.authors = [];
     this.subscription.add(this.store.pipe(select(getSelectedCourse)).subscribe(

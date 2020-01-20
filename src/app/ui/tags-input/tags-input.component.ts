@@ -72,6 +72,7 @@ export class TagsInputComponent implements OnInit, OnDestroy, ControlValueAccess
   public removeAuthor(i) {
     this.authors.removeAt(i);
     this.onChange(this.authorsInput.value);
+    this.onTouched();
   }
 
   public addAuthorHandler(selectAuthor: IAuthor) {
