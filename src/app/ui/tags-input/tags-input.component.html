@@ -1,7 +1,7 @@
 <form class="authors" [formGroup]="tagsForm">
   <div class="authors__label-block">
-    <label for="tag-input">Authors:</label>
-    <span>*required</span>
+    <label for="tag-input">{{"course.authors" | translate}}:</label>
+    <span>*{{"course.required" | translate}}</span>
   </div>
   <div class="authors__list"
        formArrayName="authors"
@@ -23,13 +23,13 @@
     <span
       *ngIf="!authors.controls.length"
     >
-      To add author use filed below
+      {{"course.toAddAuthors" | translate}}
     </span>
 
   </div>
 
   <div class="authors__error-text" *ngIf="authorsInput.errors?.required && !tagsForm.valid">
-    This field is required
+    {{"errors.required" | translate}}
   </div>
 
     <input
@@ -37,14 +37,14 @@
       type="search"
       name="tag-input"
       id="tag-input"
-      placeholder=" + add author"
+      placeholder="+{{'course.addAuthors' | translate}}"
       formControlName="tagInput"
     >
   <button
     *ngIf="tagInput.value"
   (click)="onClearSearchHandler()"
   >
-    Clear search
+    {{"buttons.clearSearch" | translate}}
   </button>
   <div
     *ngIf="showAvailableAuthors"

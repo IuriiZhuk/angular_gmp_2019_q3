@@ -8,8 +8,7 @@ import {CoursesState, getSelectedCourse} from '../../+store/reducers/courses.red
 import * as CoursesActions from '../../+store/actions/courses.actions';
 import * as fromRouterActions from '../../../actions/router.actions';
 import {Subscription} from 'rxjs';
-import {FormBuilder} from '@angular/forms';
-import {Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-course',
@@ -31,6 +30,7 @@ export class CourseComponent implements OnInit, OnDestroy {
     private store: Store<CoursesState>,
     private fb: FormBuilder,
   ) {
+
   }
 
   public courseForm = this.fb.group({

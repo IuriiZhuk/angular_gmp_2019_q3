@@ -8,6 +8,7 @@ import {select} from '@ngrx/store';
 import {getIsAuthenticated, getUser} from '../../core/auth/+state/reducers/auth.reducer';
 import * as fromRouter from '../../actions';
 import * as fromAuthActions from '../../core/auth/+state/actions/auth.actions';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-header',
@@ -22,8 +23,18 @@ export class MainHeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private store: Store<CoursesState>
+    private store: Store<CoursesState>,
+    private translate: TranslateService,
   ) {
+
+    translate.addLangs(['en', 'fr', 'de', 'ja']);
+    if (localStorage.getItem('locale')) {
+      const browserLang = localStorage.getItem('locale');
+      translate.use(browserLang.match(/en|fr|de|ja/) ? browserLang : 'en');
+    } else {
+      localStorage.setItem('locale', 'en');
+      translate.setDefaultLang('en');
+    }
   }
 
   public ngOnInit() {
@@ -35,6 +46,11 @@ export class MainHeaderComponent implements OnInit {
   public onLoginHandler() {
     this.store.dispatch(fromRouter.GO({path: ['/login']}));
     this.store.dispatch(fromAuthActions.LOG_OUT());
+  }
+
+  changeLang(language: string) {
+    localStorage.setItem('locale', language);
+    this.translate.use(language);
   }
 
 

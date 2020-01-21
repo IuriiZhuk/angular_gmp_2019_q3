@@ -2,8 +2,8 @@
   <form class="course__form" [formGroup]="courseForm" (ngSubmit)="onSaveHandler()">
     <!-- Form Input block start -->
     <div class="course__label-block course__title">
-      <label class="course__title" for="name">Title: </label>
-      <span class="course__required">*required</span>
+      <label class="course__title" for="name" >{{"course.title" | translate}}: </label>
+      <span class="course__required" translate>*{{"course.required" | translate}}</span>
     </div>
     <input
       formControlName="name"
@@ -13,7 +13,7 @@
       [ngClass]="{'course__error': name.dirty && name.errors }"
     >
     <div class="course__error-text" *ngIf="name.errors?.required && name.dirty">
-      This field is required
+      {{"errors.required" | translate}}
     </div>
     <div class="course__error-text"
          *ngIf="name.dirty && name.errors?.maxlength">
@@ -23,8 +23,8 @@
 
     <!-- Form Input block start -->
     <div class="course__label-block course__description">
-      <label class="course__description" for="description">Description: </label>
-      <span class="course__required">*required</span>
+      <label class="course__description" for="description">{{"course.description" | translate}}: </label>
+      <span class="course__required">*{{"course.required" | translate}}</span>
     </div>
     <textarea
       id="description"
@@ -37,7 +37,7 @@
 
     </textarea>
     <div class="course__error-text" *ngIf="description.errors?.required && description.dirty">
-      This field is required
+      {{"errors.required" | translate}}
     </div>
     <div class="course__error-text" *ngIf="description.dirty && description.errors?.maxlength">
       Course description should be no longer than 500 symbols
@@ -46,8 +46,8 @@
 
     <!-- Form Input block start -->
     <div class="course__label-block course__duration">
-      <label class="course__duration" for="duration">Duration: </label>
-      <span class="course__required">*required</span>
+      <label class="course__duration" for="duration">{{"course.duration" | translate}}: </label>
+      <span class="course__required">*{{"course.required" | translate}}</span>
     </div>
     <input formControlName="duration"
            id="duration"
@@ -59,14 +59,14 @@
       Course description should include only numbers
     </div>
     <div class="course__error-text" *ngIf="duration.errors?.required && duration.dirty">
-     This field is required
+      {{"errors.required" | translate}}
     </div>
     <!-- Form Input block end -->
 
     <!-- Form Input block start -->
     <div class="course__label-block course__date">
-      <label class="course__date" for="date">Date:</label>
-      <span class="course__required">*required</span>
+      <label class="course__date" for="date">{{"course.date" | translate}}:</label>
+      <span class="course__required">*{{"course.required" | translate}}</span>
     </div>
     <input formControlName="date"
            id="date"
@@ -76,7 +76,7 @@
            [ngClass]="{'course__error': date.dirty && date.errors }"
     >
     <div class="course__error-text" *ngIf="date.errors?.required && date.dirty">
-      This field is required
+      {{"errors.required" | translate}}
     </div>
     <!-- Form Input block end -->
 
@@ -87,11 +87,11 @@
     <!-- Form Input block end -->
 
     <div class="course__buttons">
-      <button type="reset" class="button course__button course__button--cancel" (click)="onCancelHandler()">Cancel
+      <button type="reset" class="button course__button course__button--cancel" (click)="onCancelHandler()">{{"buttons.cancel" | translate}}
       </button>
       <button [disabled]="courseForm.invalid" type="submit" class="button course__button"
               [ngClass]="{'course__button--save': courseForm.valid}"
-      >Save
+      >{{"buttons.save" | translate}}
       </button>
     </div>
   </form>

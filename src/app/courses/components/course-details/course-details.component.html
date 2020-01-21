@@ -16,8 +16,8 @@
   <div class="course-details__content">
     <p class="course-details__description">{{course.description}}</p>
     <div class="course-details__buttons">
-      <button class="button course-details__action course-details__edit" (click)="onEditHandler(course.id)">Edit</button>
-      <button class="button course-details__action course-details__delete" (click)="onDeleteHandler(course.id)">Delete</button>
+      <button class="button course-details__action course-details__edit" (click)="onEditHandler(course.id)">{{'buttons.edit' | translate}}</button>
+      <button class="button course-details__action course-details__delete" (click)="onDeleteHandler(course.id)">{{'buttons.delete' | translate}}</button>
     </div>
   </div>
 </div>

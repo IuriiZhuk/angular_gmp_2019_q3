@@ -1,0 +1,27 @@
+{
+	"buttons": {
+		"addCourse": "コースを追加",
+		"cancel": "キャンセル",
+		"clearSearch": "検索をクリア",
+		"delete": "削除",
+		"edit": "編集",
+		"loadMore": "もっと読み込む",
+		"save": "保存する",
+    "logOut": "読み"
+	},
+	"course": {
+		"addAuthors": "著者を追加する",
+		"authors": "著者",
+		"date": "日付",
+		"description": "説明",
+		"duration": "期間",
+		"noData": "データなし。新しいコースを追加してください",
+		"required": "必須",
+		"textToSearch": "検索するテキスト",
+		"title": "タイトル",
+		"toAddAuthors": "著者を追加するには、以下に提出してください"
+	},
+	"errors": {
+		"required": "この項目は必須です"
+	}
+}

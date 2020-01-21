@@ -1,5 +1,5 @@
 <button (click)="onAddHandle()" class="button add-course">
-  Add course
+  {{'buttons.addCourse' | translate}}
 </button>
 
 <ng-container *ngIf="courses ; else noCoursesData">
@@ -8,9 +8,9 @@
       <app-course-details [course]="course" (delete)="onDeleteHandler($event)"></app-course-details>
     </li>
   </ul>
-  <button class="button load-more" (click)="onLoadMoreHandler()"> Load More</button>
+  <button class="button load-more" (click)="onLoadMoreHandler()"> {{"buttons.loadMore" | translate}}</button>
 </ng-container>
 
 <ng-template #noCoursesData>
-  <p class="course-list__no-data"> No data. feel free to add new course</p>
+  <p class="course-list__no-data"> {{"course.noData" | translate}}</p>
 </ng-template>

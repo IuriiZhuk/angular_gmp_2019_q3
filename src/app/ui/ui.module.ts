@@ -18,6 +18,7 @@ import { AuthModule } from '../core/auth/auth.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoadingComponent } from './loading/loading.component';
 import {TagsInputComponent} from './tags-input/tags-input.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -50,6 +51,7 @@ const PIPES = [
     FontAwesomeModule,
     AuthModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   exports: [
     ...COMPONENTS,
