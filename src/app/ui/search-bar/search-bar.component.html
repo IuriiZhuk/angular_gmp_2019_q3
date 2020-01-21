@@ -1,3 +1,8 @@
-<form class="search-form">
-  <input type="text" placeholder="Text to search" class="search-form__input" name="input" [(ngModel)]="inputValue" (keyup)="onSearchHandler($event.target.value)">
+<form class="search-form" [formGroup]="searchForm">
+  <input
+    formControlName="searchInput"
+    type="text" placeholder="Text to search"
+    class="search-form__input"
+    name="input"
+  >
 </form>

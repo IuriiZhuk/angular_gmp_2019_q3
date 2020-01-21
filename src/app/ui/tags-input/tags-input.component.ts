@@ -1,8 +1,8 @@
-import {Component, EventEmitter, forwardRef, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormArray, FormBuilder, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {IAuthor} from '../../courses/models/course';
 import {Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter, tap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {CoursesState, getAuthors} from '../../courses/+store/reducers/courses.reducers';
 import * as CourseActions from '../../courses/+store/actions/courses.actions';
