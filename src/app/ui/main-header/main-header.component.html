@@ -1,10 +1,21 @@
 <app-logo></app-logo>
 
+<select #langSelect (change)="changeLang(langSelect.value)">
+  <option *ngFor="let lang of translate.getLangs()" [value]="lang"
+          [selected]="lang === translate.currentLang">{{ lang }}</option>
+</select>
+
 <div class="user-auth-info" *ngIf="isAuthenticated$ | async; else loading">
-   <span class="user-name" >
+   <span class="user-name">
     -{{(user$ | async)?.first}}-
   </span>
 
-  <button class="user-auth" (click)="onLoginHandler()">{{(user$ | async)?.first ? 'Log Out' : 'Log in'}}</button>
+  <button
+    *ngIf="(user$ | async)?.first"
+    class="user-auth"
+    (click)="onLoginHandler()"
+  >
+    {{'buttons.logOut' | translate}}
+  </button>
 </div>
-  <ng-template #loading>Loading Data...</ng-template>
+<ng-template #loading>Loading Data...</ng-template>

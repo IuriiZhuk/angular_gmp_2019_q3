@@ -7,7 +7,7 @@ import { UiModule } from './ui/ui.module';
 import { CoursesModule } from './courses/courses.module';
 import { AuthModule } from './core/auth/auth.module';
 import { AuthGuard } from './core/auth/guard/auth.guard';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { AuthInterceptor } from './core/auth/interceptors/auth-interceptor';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers, CustomSerializer } from './reducers';
@@ -17,6 +17,13 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { RouterEffects } from './effects';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +36,13 @@ import { RouterEffects } from './effects';
     UiModule,
     AuthModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     EffectsModule.forRoot([]),
     StoreModule.forRoot(reducers, {
       metaReducers

@@ -1,0 +1,27 @@
+{
+	"buttons": {
+		"addCourse": "Add course",
+		"cancel": "Cancel",
+		"clearSearch": "Clear Search",
+		"delete": "Delete",
+		"edit": "Edit",
+		"loadMore": "Load More",
+		"save": "Save",
+    "logOut": "Log Out"
+	},
+	"course": {
+		"addAuthors": "add authors",
+		"authors": "Authors",
+		"date": "Date",
+		"description": "Description",
+		"duration": "Duration",
+		"noData": "No data. feel free to add new course",
+		"required": "required",
+		"textToSearch": "Text to Search",
+		"title": "Title",
+		"toAddAuthors": "To add author use filed below"
+	},
+	"errors": {
+		"required": "This field is required"
+	}
+}

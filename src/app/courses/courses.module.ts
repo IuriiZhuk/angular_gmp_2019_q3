@@ -13,6 +13,7 @@ import * as fromCourses from '../courses/+store/reducers/courses.reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './+store/effects/courses.effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 
@@ -32,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     EffectsModule.forFeature([CourseEffects]),
     StoreModule.forFeature(fromCourses.coursesFeatureKey, fromCourses.reducer),
+    TranslateModule.forChild(),
   ],
   exports: [
     MainPageComponent,

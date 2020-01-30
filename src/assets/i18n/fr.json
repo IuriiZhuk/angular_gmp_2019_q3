@@ -1,0 +1,27 @@
+{
+	"buttons": {
+		"addCourse": "Ajouter un cours",
+		"cancel": "annuler",
+		"clearSearch": "Effacer la recherche",
+		"delete": "Effacer",
+		"edit": "modifier",
+		"loadMore": "Charger plus",
+		"save": "sauvegarder",
+    "logOut": "Uvegar Gat"
+	},
+	"course": {
+		"addAuthors": "ajouter des auteurs",
+		"authors": "Auteurs",
+		"date": "Rendez-vous amoureux",
+		"description": "La description",
+		"duration": "Durée",
+		"noData": "Pas de données. n'hésitez pas à ajouter un nouveau cours",
+		"required": "Champs obligatoires",
+		"textToSearch": "Texte à rechercher",
+		"title": "Titre",
+		"toAddAuthors": "Pour ajouter une utilisation d'auteur déposée ci-dessous"
+	},
+	"errors": {
+		"required": "Ce champ est requis"
+	}
+}

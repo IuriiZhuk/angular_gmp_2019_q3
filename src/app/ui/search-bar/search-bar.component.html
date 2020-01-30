@@ -1,7 +1,8 @@
 <form class="search-form" [formGroup]="searchForm">
   <input
     formControlName="searchInput"
-    type="text" placeholder="Text to search"
+    type="text"
+    placeholder="{{'course.textToSearch' | translate }}"
     class="search-form__input"
     name="input"
   >

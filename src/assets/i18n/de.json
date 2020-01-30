@@ -1,0 +1,27 @@
+{
+	"buttons": {
+		"addCourse": "Kurs hinzufügen",
+		"cancel": "Stornieren",
+		"clearSearch": "Saubere Suche",
+		"delete": "Löschen",
+		"edit": "Bearbeiten",
+		"loadMore": "Mehr laden",
+		"save": "sparen",
+    "logOut": "Dat Sie"
+	},
+	"course": {
+		"addAuthors": "Autoren hinzufügen",
+		"authors": "Autoren",
+		"date": "Datum",
+		"description": "Beschreibung",
+		"duration": "Dauer",
+		"noData": "Keine Daten. Fühlen Sie sich frei, einen neuen Kurs hinzuzufügen",
+		"required": "Erforderlich",
+		"textToSearch": "Zu suchender Text",
+		"title": "Titel",
+		"toAddAuthors": "Zum Hinzufügen des Autors verwenden Sie das unten stehende Feld"
+	},
+	"errors": {
+		"required": "Dieses Feld wird benötigt"
+	}
+}
