@@ -1,0 +1,65 @@
+<form class="authors" [formGroup]="tagsForm">
+  <div class="authors__label-block">
+    <label for="tag-input">Authors:</label>
+    <span>*required</span>
+  </div>
+  <div class="authors__list"
+       formArrayName="authors"
+       [ngClass]="{'authors__error': !tagsForm.valid && authorsInput.errors }"
+  >
+    <span
+      class="authors__item"
+      *ngFor="let author of authors.controls; let i = index"
+
+    >
+      {{author.value.name}}
+      <span
+        class="authors__remove"
+        (click)="removeAuthor(i)"
+      >
+        &times;
+      </span>
+    </span>
+    <span
+      *ngIf="!authors.controls.length"
+    >
+      To add author use filed below
+    </span>
+
+  </div>
+
+  <div class="authors__error-text" *ngIf="authorsInput.errors?.required && !tagsForm.valid">
+    This field is required
+  </div>
+
+    <input
+      class="authors__input"
+      type="search"
+      name="tag-input"
+      id="tag-input"
+      placeholder=" + add author"
+      formControlName="tagInput"
+    >
+  <button
+    *ngIf="tagInput.value"
+  (click)="onClearSearchHandler()"
+  >
+    Clear search
+  </button>
+  <div
+    *ngIf="showAvailableAuthors"
+    class="authors__available-list-wrapper"
+  >
+    <ul class="authors__available-list">
+      <li
+        class="authors__available-list-item"
+        *ngFor="let availableAuthor of availableAuthors"
+        (click)="addAuthorHandler(availableAuthor)"
+      >
+        {{availableAuthor.name}}
+      </li>
+    </ul>
+
+  </div>
+</form>
+

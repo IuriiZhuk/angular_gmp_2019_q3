@@ -8,6 +8,8 @@ import {CoursesState, getSelectedCourse} from '../../+store/reducers/courses.red
 import * as CoursesActions from '../../+store/actions/courses.actions';
 import * as fromRouterActions from '../../../actions/router.actions';
 import {Subscription} from 'rxjs';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-course',
@@ -19,6 +21,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   public course: ICourse;
   public id: number;
   public subscription = new Subscription();
+  public authors: IAuthor[];
 
   constructor(
     private router: Router,
@@ -26,37 +29,61 @@ export class CourseComponent implements OnInit, OnDestroy {
     private courseService: CoursesService,
     private location: Location,
     private store: Store<CoursesState>,
+    private fb: FormBuilder,
   ) {
   }
 
-  ngOnInit() {
+  public courseForm = this.fb.group({
+    name: ['', [Validators.required, Validators.maxLength(30)]],
+    description: ['', [Validators.required, Validators.maxLength(500)]],
+    duration: ['', [Validators.required, Validators.pattern(/\d+$/)]],
+    date: ['', Validators.required],
+    authors: ['', Validators.required],
 
+  });
+
+  get name() {
+    return this.courseForm.get('name');
+  }
+  get description() {
+    return this.courseForm.get('description');
+  }
+  get duration() {
+    return this.courseForm.get('duration');
+  }
+  get date() {
+    return this.courseForm.get('date');
+  }
+
+  get authorsArray() {
+    return this.courseForm.get('authors');
+  }
+
+  ngOnInit() {
+    this.authors = [];
     this.subscription.add(this.store.pipe(select(getSelectedCourse)).subscribe(
       (course: ICourse) => {
         if (course) {
           this.course = course;
-        } else {
-          this.course = {
-            id: null,
-            name: '',
-            date: '',
-            length: null,
-            description: '',
-            authors: {} as IAuthor,
-            isTopRated: false,
-          };
+          this.setCourseValueToForm(course);
+          this.authors = course.authors;
         }
       }
     ));
   }
 
   public onCancelHandler() {
+    this.courseForm.get('authors').setValue({
+      courseAuthors: [],
+      tagInput: '',
+    });
     this.store.dispatch(fromRouterActions.GO({
       path: ['/courses'],
     }));
   }
 
   public onSaveHandler() {
+    this.course = {...this.course, ...this.courseForm.value};
     if (this.course.id) {
       this.store.dispatch(CoursesActions.UPDATE_COURSES({id: this.course.id, course: this.course}));
     } else {
@@ -67,5 +94,18 @@ export class CourseComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
 
+  }
+
+  private setCourseValueToForm(course: ICourse) {
+    const date = new Date(course.date);
+    const formattedDate = date.toISOString().substring(0, 10);
+
+    this.courseForm.setValue({
+      name: course.name,
+      description: course.description,
+      duration: course.length,
+      date: formattedDate,
+      authors: {courseAuthors: course.authors, tagInput: ''},
+    });
   }
 }

@@ -4,7 +4,7 @@ import {of} from 'rxjs';
 import {CoursesService} from '../../services/courses.service';
 import * as CoursesActions from '../actions/courses.actions';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {ICourse} from '../../models/course';
+import {IAuthor, ICourse} from '../../models/course';
 
 import * as fromRouterActions from '../../../actions/router.actions';
 import {AuthorizationService} from '../../../core/auth/service/authorization.service';
@@ -97,10 +97,20 @@ export class CourseEffects {
     )
   );
 
+  loadAuthors$ = createEffect(() => this.actions$.pipe(
+    ofType(
+      CoursesActions.LOAD_AUTHORS
+    ),
+    mergeMap(({term}) => this.coursesService.getAuthors(term)
+                             .pipe(
+                               map((authors: IAuthor[]) => CoursesActions.LOAD_AUTHORS_SUCCESS({authors})),
+                               catchError(error => of(CoursesActions.LOAD_AUTHORS_FAIL({error})))
+                             )))
+  );
+
   constructor(
     private actions$: Actions,
     private coursesService: CoursesService,
-    private authService: AuthorizationService,
   ) {
   }
 }

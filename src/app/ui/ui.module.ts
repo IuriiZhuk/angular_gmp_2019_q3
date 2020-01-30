@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
@@ -17,6 +17,7 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { AuthModule } from '../core/auth/auth.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoadingComponent } from './loading/loading.component';
+import {TagsInputComponent} from './tags-input/tags-input.component';
 
 const COMPONENTS = [
   MainHeaderComponent,
@@ -26,6 +27,7 @@ const COMPONENTS = [
   LogoComponent,
   NotFoundComponent,
   LoadingComponent,
+  TagsInputComponent,
 ];
 
 const PIPES = [
@@ -47,6 +49,7 @@ const PIPES = [
     FormsModule,
     FontAwesomeModule,
     AuthModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ...COMPONENTS,
